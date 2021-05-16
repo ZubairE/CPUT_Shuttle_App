@@ -34,10 +34,8 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(studentNumber.getText().toString()) || TextUtils.isEmpty(studentPassword.getText().toString())){
                     Toast.makeText(Login.this, "Fields Cannot Be Empty", Toast.LENGTH_LONG).show();
-                }else if(studentNumber.getText().toString().equals(validStudentNumber)){
-                    if(studentPassword.getText().toString().equals(validPassword)){
+                }else if(studentNumber.getText().toString().equals(validStudentNumber) || studentPassword.getText().toString().equals(validPassword)){
                         Toast.makeText(Login.this, "Welcome to CPUT-Shuttle App!", Toast.LENGTH_LONG).show();
-                    }
                 }else{
                     Toast.makeText(Login.this, "Student does not exist.Register Instead?",Toast.LENGTH_LONG).show();
                 }
