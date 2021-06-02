@@ -17,6 +17,8 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
 
+    //Student Number and password used to login.
+    //This is just for testing purposes
     long validStudentNumber = 217203027;
     String validPassword = "Breyton";
 
