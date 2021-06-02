@@ -1,4 +1,5 @@
 package za.ac.cput_shuttleapp;
+/*Breyton Ernstzen - 217203027*/
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,8 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
 
+    //Student Number and password used to login.
+    //This is just for testing purposes
     long validStudentNumber = 217203027;
     String validPassword = "Breyton";
 
@@ -38,6 +41,7 @@ public class Login extends AppCompatActivity {
                 } else if (studentNumber.getText().toString().equals(validStudentNumber) || studentPassword.getText().toString().equals(validPassword)) {
                     Toast.makeText(Login.this, "Welcome to CPUT-Shuttle App!", Toast.LENGTH_LONG).show();
                     mainActivity();//Opens next page(dummy page) when login was success
+
                 } else {
                     Toast.makeText(Login.this, "Student does not exist.Register Instead?", Toast.LENGTH_LONG).show();
                 }
