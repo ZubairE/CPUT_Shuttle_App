@@ -63,7 +63,7 @@
         android:id="@+id/btnCancels"
         android:layout_width="116dp"
         android:layout_height="44dp"
-        android:text="@android:string/cancel"
+        android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.078"
