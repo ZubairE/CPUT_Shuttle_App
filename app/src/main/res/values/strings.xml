@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">CPUT_ShuttleApp</string>
+    <string name="student_number">Student Number</string>
+    <string name="password">Password</string>
+    <string name="registration">Registration</string>
+    <string name="fill_in_your_details_below">FILL IN YOUR DETAILS BELOW:</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_student_number">Enter Student Number</string>
+    <string name="register">Register</string>
 </resources>
