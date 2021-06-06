@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">CPUT_ShuttleApp</string>
+
+
+    <string name="disability">Disability</string>
+    <string name="ticket_booking">TICKET BOOKING</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="next">Next</string>
+    <string name="date">Date</string>
+    <string name="app_name">CPUT</string>
+
 </resources>
