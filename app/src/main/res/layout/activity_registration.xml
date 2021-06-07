@@ -14,8 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="340dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_password"
+        android:textColorHint="@color/black"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,20 +28,24 @@
         android:id="@+id/tvNumber"
         android:layout_width="271dp"
         android:layout_height="27dp"
-        android:layout_marginTop="212dp"
         android:text="@string/fill_in_your_details_below"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296" />
 
     <EditText
         android:id="@+id/etNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_student_number"
+        android:textColorHint="@color/black"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/etRegPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,11 +59,17 @@
         android:layout_width="233dp"
         android:layout_height="46dp"
         android:text="@string/register"
+        android:radius="1000dp"
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topRightRadius="10dp"
+        android:topLeftRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etRegPassword"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.139" />
 
     <Button
         android:id="@+id/btnCancels"
@@ -82,6 +94,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/Logo" />
+        app:srcCompat="@drawable/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
