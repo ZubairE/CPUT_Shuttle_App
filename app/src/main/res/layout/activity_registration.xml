@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btnReg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00F2FE"
+    tools:context=".RegistrationActivity">
+
+
+    <EditText
+        android:id="@+id/etRegPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="340dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/enter_password"
+        android:textColorHint="@color/black"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="271dp"
+        android:layout_height="27dp"
+        android:text="@string/fill_in_your_details_below"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296" />
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/enter_student_number"
+        android:textColorHint="@color/black"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/etRegPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumber"
+        app:layout_constraintVertical_bias="0.516" />
+
+    <Button
+        android:id="@+id/btnRegstrate"
+        android:layout_width="233dp"
+        android:layout_height="46dp"
+        android:text="@string/register"
+        android:radius="1000dp"
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topRightRadius="10dp"
+        android:topLeftRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etRegPassword"
+        app:layout_constraintVertical_bias="0.139" />
+
+    <Button
+        android:id="@+id/btnCancels"
+        android:layout_width="116dp"
+        android:layout_height="44dp"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegstrate"
+        app:layout_constraintVertical_bias="0.712" />
+
+    <ImageView
+        android:id="@+id/ivCput"
+        android:layout_width="wrap_content"
+        android:layout_height="117dp"
+        android:contentDescription="@string/my_image_description"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
