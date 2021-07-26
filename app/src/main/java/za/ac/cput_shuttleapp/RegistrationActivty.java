@@ -24,30 +24,40 @@ public class RegistrationActivty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_activty);
 
+        txtFirstName = findViewById(R.id.firstname);
+        txtLastName = findViewById(R.id.lastname);
+        studNumber = findViewById(R.id.stuNum);
+        password = findViewById(R.id.pw);
+        confirmPW = findViewById(R.id.cpw);
+        btnRegister = findViewById(R.id.register);
+        btnBack = findViewById(R.id.back);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(TextUtils.isEmpty(txtFirstName.getText().toString())||TextUtils.isEmpty(txtLastName.getText().toString())||
-                TextUtils.isEmpty(studNumber.getText().toString())||TextUtils.isEmpty(password.getText().toString())||
-                TextUtils.isEmpty(confirmPW.getText().toString())){
-                    Toast.makeText(RegistrationActivty.this,"Please complete all details",Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
+                        TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
+                        TextUtils.isEmpty(confirmPW.getText().toString())) {
+                    Toast.makeText(RegistrationActivty.this, "Please complete all details", Toast.LENGTH_LONG).show();
                 }//Still need code as soon as database is completed
 
-                }
+            }
 
         });
 
         btnBack = findViewById(R.id.back);
-        btnBack.setOnClickListener(new View.OnClickListener(){
+        btnBack.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v){
+            public void onClick(View v) {
                 goBack();
             }
         });
     }
-    public void goBack(){
+
+    public void goBack() {
         Intent back = new Intent(this, Login.class);
         startActivity(back);
-        }
     }
+}
+
