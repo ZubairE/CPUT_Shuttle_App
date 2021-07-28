@@ -24,7 +24,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration_activty);
+        setContentView(R.layout.activity_registration);
 
         txtFirstName = findViewById(R.id.firstname);
         txtLastName = findViewById(R.id.lastname);
