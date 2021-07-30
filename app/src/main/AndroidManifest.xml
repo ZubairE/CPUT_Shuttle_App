@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CPUT_ShuttleApp">
-        <activity android:name=".Timetable"></activity>
+        <activity android:name=".Timetable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ShuttleTimes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

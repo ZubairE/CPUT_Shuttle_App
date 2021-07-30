@@ -8,4 +8,40 @@
     <string name="enter_student_number">Enter Student Number</string>
     <string name="register">Register</string>
 
+    <string-array name="Locations">
+
+        <item>Athlone Campus</item>
+        <item>District Six Campus</item>
+        <item>Groote Schuur Hospital</item>
+        <item>Bellville Campus</item>
+        <item>Mowbray Campus</item>
+        <item>Roeland Street Building</item>
+        <item>Media City Building</item>
+        <item>Tygerberg Hospital</item>
+        <item>Granger Bay Campus</item>
+
+    </string-array>
+
+    <string-array name="Locations2">
+
+        <item>District Six Campus</item>
+        <item>Athlone Campus</item>
+        <item>Groote Schuur Hospital</item>
+        <item>Bellville Campus</item>
+        <item>Mowbray Campus</item>
+        <item>Roeland Street Building</item>
+        <item>Media City Building</item>
+        <item>Tygerberg Hospital</item>
+        <item>Granger Bay Campus</item>
+
+    </string-array>
+
+    <string-array name="Days">
+
+        <item>Monday-Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+
+    </string-array>
+
 </resources>
