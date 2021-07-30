@@ -3,6 +3,8 @@ package za.ac.cput_shuttleapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class RegistrationActivity extends AppCompatActivity {
+    SQLiteOpenHelper db_OpenHelper; //Calls the database class
+    SQLiteDatabase myDB; //Database
     EditText txtFirstName;
     EditText txtLastName;
     EditText studNumber;
