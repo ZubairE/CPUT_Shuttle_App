@@ -25,10 +25,12 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btnRegister;
     Button btnBack;
 
+    long sn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        db_OpenHelper = new RegistrationDatabase(this);
 
         txtFirstName = findViewById(R.id.firstname);
         txtLastName = findViewById(R.id.lastname);
@@ -41,12 +43,25 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = txtFirstName.getText().toString();
+                String surname = txtLastName.getText().toString();
+                String stuNum = studNumber.getText().toString();//Not suppose to be a string value
+                String userPw = password.getText().toString();
+                String confirmUserPw = confirmPW.getText().toString();
+                myDB = db_OpenHelper.getWritableDatabase();//Take out if it not work
 
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                         TextUtils.isEmpty(confirmPW.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
-                }//Still need code as soon as database is completed
+                //Remove else-if statement if it is not working or cause problems.
+                }else if(txtFirstName.getText().toString().equals(name)||txtLastName.getText().toString().equals(surname)||
+                        studNumber.getText().toString().equals(stuNum)||password.getText().toString().equals(userPw)||
+                        confirmPW.getText().toString().equals(confirmUserPw)){
+                        Toast.makeText(RegistrationActivity.this,"Registration successfully",Toast.LENGTH_LONG).show();
+
+                    //Still need code as soon as database is completed
+                }
 
             }
 
