@@ -27,6 +27,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btnBack;
 
     long sn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +56,13 @@ public class RegistrationActivity extends AppCompatActivity {
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                         TextUtils.isEmpty(confirmPW.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
-                //Remove else-if statement if it is not working or cause problems.
-                }else if(txtFirstName.getText().toString().equals(name)||txtLastName.getText().toString().equals(surname)||
-                        studNumber.getText().toString().equals(stuNum)||password.getText().toString().equals(userPw)||
-                        confirmPW.getText().toString().equals(confirmUserPw)){
-                        insertData(name,surname,stuNum,userPw,confirmUserPw);//Take out if not working.Added on 2nd August 2021
-                        Toast.makeText(RegistrationActivity.this,"Registration successfully",Toast.LENGTH_LONG).show();
-
+                    //Remove else-if statement if it is not working or cause problems.
+                } else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
+                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
+                        confirmPW.getText().toString().equals(confirmUserPw)) {
+                    insertData(name, surname, stuNum, userPw, confirmUserPw);//Take out if not working.Added on 2nd August 2021
+                    Toast.makeText(RegistrationActivity.this, "Registration successfully", Toast.LENGTH_LONG).show();
+                    timetable();
                     //Still need code as soon as database is completed
                 }
 
@@ -81,6 +82,10 @@ public class RegistrationActivity extends AppCompatActivity {
     public void goBack() {
         Intent back = new Intent(this, Login.class);
         startActivity(back);
+    }
+    public void timetable(){
+        Intent timetable = new Intent(this, Timetable.class);
+        startActivity(timetable);
     }
     public void insertData(String studName,String studSurname,String studNumber,String password,String studConfrmPw){
     //This method was added on the 30th of July 2021. Must take it out if it not works.
