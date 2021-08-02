@@ -2,6 +2,7 @@ package za.ac.cput_shuttleapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -58,6 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }else if(txtFirstName.getText().toString().equals(name)||txtLastName.getText().toString().equals(surname)||
                         studNumber.getText().toString().equals(stuNum)||password.getText().toString().equals(userPw)||
                         confirmPW.getText().toString().equals(confirmUserPw)){
+                        insertData(name,surname,stuNum,userPw,confirmUserPw);//Take out if not working.Added on 2nd August 2021
                         Toast.makeText(RegistrationActivity.this,"Registration successfully",Toast.LENGTH_LONG).show();
 
                     //Still need code as soon as database is completed
@@ -79,6 +81,17 @@ public class RegistrationActivity extends AppCompatActivity {
     public void goBack() {
         Intent back = new Intent(this, Login.class);
         startActivity(back);
+    }
+    public void insertData(String studName,String studSurname,String studNumber,String password,String studConfrmPw){
+    //This method was added on the 30th of July 2021. Must take it out if it not works.
+        ContentValues cv = new ContentValues();
+        cv.put(RegistrationDatabase.COLUMN_2,studName);
+        cv.put(RegistrationDatabase.COLUMN_3,studSurname);
+        cv.put(RegistrationDatabase.COLUMN_4,studNumber);
+        cv.put(RegistrationDatabase.COLUMN_5,password);
+        cv.put(RegistrationDatabase.COLUMN_6,studConfrmPw);
+        long id = myDB.insert(RegistrationDatabase.DB_TABLE_NAME,null, cv);
+        //Continue here.
     }
 }
 
