@@ -26,8 +26,8 @@ public class Login extends AppCompatActivity {
 
     //Student Number and password used to login.
     //This is just for testing purposes
-    long validStudentNumber = 217203027;
-    String validPassword = "Breyton";
+    //long validStudentNumber = 217203027;
+    //String validPassword = "Breyton";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
                 if (TextUtils.isEmpty(studentNumber.getText().toString()) || TextUtils.isEmpty(studentPassword.getText().toString())) {
                     Toast.makeText(Login.this, "Fields Cannot Be Empty", Toast.LENGTH_LONG).show();
                 } else if (cursor != null && cursor.getCount() > 0){
+                    cursor.moveToNext();//take out if not work
                     Toast.makeText(Login.this, "Welcome to CPUT-Shuttle App!", Toast.LENGTH_LONG).show();
                     timetable();//Opens the timetable page after user entered login details
 
