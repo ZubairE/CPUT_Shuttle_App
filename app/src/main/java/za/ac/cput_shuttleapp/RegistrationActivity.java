@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -57,17 +58,15 @@ public class RegistrationActivity extends AppCompatActivity {
                         TextUtils.isEmpty(confirmPW.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
                     //Remove else-if statement if it is not working or cause problems.
-                } else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
-                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
-                        confirmPW.getText().toString().equals(confirmUserPw)) {
-                    insertData(name, surname, stuNum, userPw, confirmUserPw);//Take out if not working.Added on 2nd August 2021
-                    Toast.makeText(RegistrationActivity.this, "Registration successfully", Toast.LENGTH_LONG).show();
-                    timetable();
-                    //Still need code as soon as database is completed
+                }else if(txtFirstName.getText().toString().equals(name)||txtLastName.getText().toString().equals(surname)||
+                        studNumber.getText().toString().equals(stuNum)||password.getText().toString().equals(confirmPW)&&
+                        confirmPW.getText().toString().equals(password)){
+                    Toast.makeText(RegistrationActivity.this,"Registration Success",Toast.LENGTH_LONG).show();
+                    login();
+                }else{
+                    Toast.makeText(RegistrationActivity.this,"Password does not match",Toast.LENGTH_LONG).show();
                 }
-
-            }
-
+                }
         });
 
         btnBack = findViewById(R.id.back);
@@ -83,21 +82,38 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent back = new Intent(this, Login.class);
         startActivity(back);
     }
-    public void timetable(){
+
+    public void timetable() {
         Intent timetable = new Intent(this, Timetable.class);
         startActivity(timetable);
     }
-    public void insertData(String studName,String studSurname,String studNumber,String password,String studConfrmPw){
-    //This method was added on the 30th of July 2021. Must take it out if it not works.
-        ContentValues cv = new ContentValues();
-        cv.put(RegistrationDatabase.COLUMN_2,studName);
-        cv.put(RegistrationDatabase.COLUMN_3,studSurname);
-        cv.put(RegistrationDatabase.COLUMN_4,studNumber);
-        cv.put(RegistrationDatabase.COLUMN_5,password);
-        cv.put(RegistrationDatabase.COLUMN_6,studConfrmPw);
-        long id = myDB.insert(RegistrationDatabase.DB_TABLE_NAME,null, cv);
-        //Continue here.
+
+    public void login() {
+        Intent loginPage = new Intent(this, Login.class);
+        startActivity(loginPage);
     }
-}
+    //public 'void' insertData is the actual method.
+    public void insertData(String studName, String studSurname, String studNumber, String password, String studConfrmPw) {
+        //This method was added on the 30th of July 2021. Must take it out if it not works.
+        ContentValues cv = new ContentValues();
+        cv.put(RegistrationDatabase.COLUMN_2, studName);
+        cv.put(RegistrationDatabase.COLUMN_3, studSurname);
+        cv.put(RegistrationDatabase.COLUMN_4, studNumber);
+        cv.put(RegistrationDatabase.COLUMN_5, password);
+        cv.put(RegistrationDatabase.COLUMN_6, studConfrmPw);
+        long id = myDB.insert(RegistrationDatabase.DB_TABLE_NAME, null, cv);
+        //Continue here.
+        //Take this statement out if not working.Added on 6th August 2021
+
+    }
+
+    //This method may cause problems. Take it out if it mess up the program. Added on 6th of August 2021.
+
+        }
+
+
+
+
+
 
 
