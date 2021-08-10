@@ -15,7 +15,7 @@ public class RegistrationDatabase extends SQLiteOpenHelper {
     public static final String COLUMN_3 = "Last_Name";
     public static final String COLUMN_4 = "Student_Number";
     public static final String COLUMN_5 = "Password";
-    public static final String COLUMN_6 = "Confirm_Password";
+    public static final String COLUMN_6 = "Cellphone Number";
 
     public RegistrationDatabase(@Nullable Context context) {
         super(context, DB_NAME,null,1);
