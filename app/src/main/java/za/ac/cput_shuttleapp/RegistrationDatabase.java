@@ -23,7 +23,7 @@ public class RegistrationDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DB_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,First_Name TEXT,Last_Name TEXT,Student_Number long,Password TEXT,Confirm_Password TEXT)");
+        db.execSQL("CREATE TABLE " + DB_TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,First_Name TEXT,Last_Name TEXT,Student_Number long,Password TEXT,Cell_No long)");
     }
 
     @Override
