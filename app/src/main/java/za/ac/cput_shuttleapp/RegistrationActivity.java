@@ -24,6 +24,7 @@ import java.util.regex.Pattern;
 public class RegistrationActivity extends AppCompatActivity {
     SQLiteOpenHelper db_OpenHelper; //Calls the database class
     SQLiteDatabase myDB; //Database
+
     EditText txtFirstName;
     EditText txtLastName;
     EditText studNumber;
@@ -58,7 +59,6 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register);
         btnBack = findViewById(R.id.back);
 
-
         chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -75,13 +75,13 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myDB = db_OpenHelper.getWritableDatabase();//Take out if it not work
                 String name = txtFirstName.getText().toString();
                 String surname = txtLastName.getText().toString();
                 String stuNum = studNumber.getText().toString();//Not suppose to be a string value
                 String userPw = password.getText().toString();
                 String cellNum = cellNo.getText().toString();
-                myDB = db_OpenHelper.getWritableDatabase();//Take out if it not work
+
 
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
@@ -91,11 +91,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else if (!PASSWORD_PATTERN.matcher(userPw).matches()) {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
-                /*}else if(!password.equals(confirmPW)){
-                    confirmPW.setError("Oops! Passwords does not match");*/
                 } else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
                         studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
                         cellNo.getText().toString().equals(cellNum)) {
+                    insertData(name,surname,stuNum,userPw,cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
                     //Toast.makeText(RegistrationActivity.this,"Password does not match",Toast.LENGTH_LONG).show();
@@ -129,14 +128,14 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(loginPage);
     }
     //public 'void' insertData is the actual method.
-    public void insertData(String studName, String studSurname, String studNumber, String password, String studConfrmPw) {
+    public void insertData(String studName, String studSurname, String studNumber, String password, String cellNumber) {
         //This method was added on the 30th of July 2021. Must take it out if it not works.
         ContentValues cv = new ContentValues();
         cv.put(RegistrationDatabase.COLUMN_2, studName);
         cv.put(RegistrationDatabase.COLUMN_3, studSurname);
         cv.put(RegistrationDatabase.COLUMN_4, studNumber);
         cv.put(RegistrationDatabase.COLUMN_5, password);
-        cv.put(RegistrationDatabase.COLUMN_6, studConfrmPw);
+        cv.put(RegistrationDatabase.COLUMN_6, cellNumber);
         long id = myDB.insert(RegistrationDatabase.DB_TABLE_NAME, null, cv);
         //Continue here.
         //Take this statement out if not working.Added on 6th August 2021
