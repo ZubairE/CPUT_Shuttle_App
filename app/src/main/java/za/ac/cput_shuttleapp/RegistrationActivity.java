@@ -29,8 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText studNumber;
     EditText password;
     CheckBox chk;
-    CheckBox chk2;
-    EditText confirmPW;
+    EditText cellNo;
     Button btnRegister;
     Button btnBack;
 
@@ -55,23 +54,10 @@ public class RegistrationActivity extends AppCompatActivity {
         studNumber = findViewById(R.id.stuNum);
         password = findViewById(R.id.pw);
         chk = findViewById(R.id.chk);
-        confirmPW = findViewById(R.id.cpw);
-        chk2 = findViewById(R.id.chk2);
+        cellNo = findViewById(R.id.cpw);
         btnRegister = findViewById(R.id.register);
         btnBack = findViewById(R.id.back);
 
-        chk2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean b) {
-
-                if(b){
-                    confirmPW.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
-                }else{
-                    confirmPW.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                }
-            }
-        });
 
         chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,37 +75,33 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String name = txtFirstName.getText().toString();
                 String surname = txtLastName.getText().toString();
                 String stuNum = studNumber.getText().toString();//Not suppose to be a string value
                 String userPw = password.getText().toString();
-                String confirmUserPw = confirmPW.getText().toString();
+                String cellNum = cellNo.getText().toString();
                 myDB = db_OpenHelper.getWritableDatabase();//Take out if it not work
 
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
-                        TextUtils.isEmpty(confirmPW.getText().toString())) {
+                        TextUtils.isEmpty(cellNo.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
-                }else if(!PASSWORD_PATTERN.matcher(userPw).matches()) {
+                } else if (!PASSWORD_PATTERN.matcher(userPw).matches()) {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
-
-                }else if(!PASSWORD_PATTERN.matcher(confirmUserPw).matches()) {
-                    confirmPW.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
                 /*}else if(!password.equals(confirmPW)){
                     confirmPW.setError("Oops! Passwords does not match");*/
-
-                }else if(txtFirstName.getText().toString().equals(name)||txtLastName.getText().toString().equals(surname)||
-                        studNumber.getText().toString().equals(stuNum)||password.getText().toString().equals(userPw)&&
-                        confirmPW.getText().toString().equals(confirmUserPw)) {
+                } else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
+                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
+                        cellNo.getText().toString().equals(cellNum)) {
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
+                    //Toast.makeText(RegistrationActivity.this,"Password does not match",Toast.LENGTH_LONG).show();
 
-                }else{
-                    Toast.makeText(RegistrationActivity.this,"Password does not match",Toast.LENGTH_LONG).show();
                 }
-                }
+            }
         });
 
         btnBack = findViewById(R.id.back);
@@ -160,9 +142,11 @@ public class RegistrationActivity extends AppCompatActivity {
         //Take this statement out if not working.Added on 6th August 2021
 
     }
-    //This method may cause problems. Take it out if it mess up the program. Added on 6th of August 2021.
 
         }
+
+
+
 
 
 
