@@ -8,9 +8,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ public class Login extends AppCompatActivity {
 
     EditText studentNumber;
     EditText studentPassword;
+    CheckBox chk3;
     Button btnLogin;
     Button btnRegister;
 
@@ -38,8 +42,22 @@ public class Login extends AppCompatActivity {
 
         studentNumber = findViewById(R.id.StudentNumber);
         studentPassword = findViewById(R.id.Password);
+        chk3 = findViewById(R.id.chk3);
         btnLogin = findViewById(R.id.login);
         btnRegister = findViewById(R.id.register);
+
+        chk3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    studentPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                } else {
+                    studentPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
