@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        openHelper = new RegistrationDatabase(this);
+        openHelper = new DataBaseHelper(this);
         db = openHelper.getReadableDatabase();
 
         studentNumber = findViewById(R.id.StudentNumber);
@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
                 String stuNum = studentNumber.getText().toString();
                 String userPw = studentPassword.getText().toString();
                 //Take out this code statement if it it not working or mess up the functionality
-                cursor = db.rawQuery("SELECT * FROM "+RegistrationDatabase.DB_TABLE_NAME+ " WHERE " + RegistrationDatabase.COLUMN_4+ "=? AND " + RegistrationDatabase.COLUMN_5+ "=?", new String[]{stuNum, userPw});
+                cursor = db.rawQuery("SELECT * FROM "+DataBaseHelper.DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "=? AND " + DataBaseHelper.COLUMN_5+ "=?", new String[]{stuNum, userPw});
 
                 if (TextUtils.isEmpty(studentNumber.getText().toString()) || TextUtils.isEmpty(studentPassword.getText().toString())) {
                     Toast.makeText(Login.this, "Fields Cannot Be Empty", Toast.LENGTH_LONG).show();

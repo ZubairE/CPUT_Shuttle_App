@@ -48,7 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        db_OpenHelper = new RegistrationDatabase(this);
+        db_OpenHelper = new DataBaseHelper(this);
 
         txtFirstName = findViewById(R.id.firstname);
         txtLastName = findViewById(R.id.lastname);
@@ -131,12 +131,12 @@ public class RegistrationActivity extends AppCompatActivity {
     public void insertData(String studName, String studSurname, String studNumber, String password, String cellNumber) {
         //This method was added on the 30th of July 2021. Must take it out if it not works.
         ContentValues cv = new ContentValues();
-        cv.put(RegistrationDatabase.COLUMN_2, studName);
-        cv.put(RegistrationDatabase.COLUMN_3, studSurname);
-        cv.put(RegistrationDatabase.COLUMN_4, studNumber);
-        cv.put(RegistrationDatabase.COLUMN_5, password);
-        cv.put(RegistrationDatabase.COLUMN_6, cellNumber);
-        long id = myDB.insert(RegistrationDatabase.DB_TABLE_NAME, null, cv);
+        cv.put(DataBaseHelper.COLUMN_2, studName);
+        cv.put(DataBaseHelper.COLUMN_3, studSurname);
+        cv.put(DataBaseHelper.COLUMN_4, studNumber);
+        cv.put(DataBaseHelper.COLUMN_5, password);
+        cv.put(DataBaseHelper.COLUMN_6, cellNumber);
+        long id = myDB.insert(DataBaseHelper.DB_TABLE_NAME, null, cv);
         //Continue here.
         //Take this statement out if not working.Added on 6th August 2021
 
