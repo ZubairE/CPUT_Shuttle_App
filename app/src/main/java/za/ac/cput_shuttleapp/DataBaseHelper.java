@@ -16,7 +16,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_5 = "Password";
     public static final String COLUMN_6 = "Cellphone Number";
 
-    public DataBaseHelper(@Nullable Context context) {
+    public DataBaseHelper(Context context) {
         super(context, DB_NAME, null,  1);
     }
 
