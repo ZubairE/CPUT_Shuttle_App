@@ -34,7 +34,6 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btnRegister;
     Button btnBack;
 
-    //Take out if not working
     public static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +             //The pw requires at least one digit
             "(?=.*[a-z])" +             //The pw requires at least one small letter
@@ -43,6 +42,7 @@ public class RegistrationActivity extends AppCompatActivity {
             "(?=\\S+$)" +               //No white spaces allowed
             ".{8,15}" +                   //The password requires at least 8 characters
             "$");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,45 +59,46 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register);
         btnBack = findViewById(R.id.back);
 
-        chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(isChecked){
-                        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
-                }else{
-                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                }
-            }
-        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDB = db_OpenHelper.getWritableDatabase();//Take out if it not work
                 String name = txtFirstName.getText().toString();
                 String surname = txtLastName.getText().toString();
-                String stuNum = studNumber.getText().toString();//Not suppose to be a string value
+                String stuNum = studNumber.getText().toString();
                 String userPw = password.getText().toString();
                 String cellNum = cellNo.getText().toString();
+                myDB = db_OpenHelper.getWritableDatabase();
+                //Take this cursor class out if not working.or mess up the code
+                Cursor myCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "= ?",new String[]{stuNum});
 
-
+                //*****
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                         TextUtils.isEmpty(cellNo.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
-                } else if (!PASSWORD_PATTERN.matcher(userPw).matches()) {
-                    password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
+                    //Take out if not working
+                }else if(myCursor.getCount() > 0){
+                    Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
+                    //*************************
 
-                } else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
-                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
-                        cellNo.getText().toString().equals(cellNum)) {
-                    insertData(name,surname,stuNum,userPw,cellNum);
+                }else if(PASSWORD_PATTERN.matcher(userPw).matches()) {
+                    insertData(name, surname, stuNum, userPw, cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
-                    //Toast.makeText(RegistrationActivity.this,"Password does not match",Toast.LENGTH_LONG).show();
+
+                }else if(!PASSWORD_PATTERN.matcher(userPw).matches()) {
+                    password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
+
+
+                  /*} else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
+                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
+                        cellNo.getText().toString().equals(cellNum)) {
+                    insertData(name, surname, stuNum, userPw, cellNum);
+                    Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
+                    //timetable();
+                    login();*/
 
                 }
             }
@@ -109,6 +110,19 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 goBack();
+            }
+        });
+
+        chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                } else {
+                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
             }
         });
     }
@@ -127,22 +141,32 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
     }
+
     //public 'void' insertData is the actual method.
-    public void insertData(String studName, String studSurname, String studNumber, String password, String cellNumber) {
+    public void insertData(String name, String surname, String stuNum, String userPw, String cellNum) {
         //This method was added on the 30th of July 2021. Must take it out if it not works.
-        ContentValues cv = new ContentValues();
-        cv.put(DataBaseHelper.COLUMN_2, studName);
-        cv.put(DataBaseHelper.COLUMN_3, studSurname);
-        cv.put(DataBaseHelper.COLUMN_4, studNumber);
-        cv.put(DataBaseHelper.COLUMN_5, password);
-        cv.put(DataBaseHelper.COLUMN_6, cellNumber);
-        long id = myDB.insert(DataBaseHelper.DB_TABLE_NAME, null, cv);
-        //Continue here.
-        //Take this statement out if not working.Added on 6th August 2021
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataBaseHelper.COLUMN_2, name);
+        contentValues.put(DataBaseHelper.COLUMN_3, surname);
+        contentValues.put(DataBaseHelper.COLUMN_4, stuNum);
+        contentValues.put(DataBaseHelper.COLUMN_5, userPw);
+        contentValues.put(DataBaseHelper.COLUMN_6, cellNum);
+        long id = myDB.insert(DataBaseHelper.MY_DB_TABLE_NAME, null, contentValues);
+
+    }
+    //Take out if not working. This method was added on the 12th of August 2021
+    //public boolean checkUser(){
+    public void checkUser(String studentNumber) {
+        myDB = db_OpenHelper.getWritableDatabase();
+        Cursor cursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "= ?",new String[]{studentNumber});
+         //Add code in here
+        if(cursor.getCount() > 0){
+            Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
+        }
+    }
 
     }
 
-        }
 
 
 
