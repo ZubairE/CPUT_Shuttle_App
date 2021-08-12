@@ -1,4 +1,5 @@
 package za.ac.cput_shuttleapp;
+//Breyton Ernstzen - 217203027
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,16 +70,15 @@ public class RegistrationActivity extends AppCompatActivity {
                 String userPw = password.getText().toString();
                 String cellNum = cellNo.getText().toString();
                 myDB = db_OpenHelper.getWritableDatabase();
-                //Take this cursor class out if not working.or mess up the code
                 Cursor myCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "= ?",new String[]{stuNum});
 
-                //*****
+                //Requires that all fields must be completed
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
                         TextUtils.isEmpty(studNumber.getText().toString()) || TextUtils.isEmpty(password.getText().toString()) ||
                         TextUtils.isEmpty(cellNo.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
-                    //Take out if not working
+                    //Checks if user exist
                 }else if(myCursor.getCount() > 0){
                     Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
                     //*************************
@@ -152,20 +152,10 @@ public class RegistrationActivity extends AppCompatActivity {
         contentValues.put(DataBaseHelper.COLUMN_5, userPw);
         contentValues.put(DataBaseHelper.COLUMN_6, cellNum);
         long id = myDB.insert(DataBaseHelper.MY_DB_TABLE_NAME, null, contentValues);
-
-    }
-    //Take out if not working. This method was added on the 12th of August 2021
-    //public boolean checkUser(){
-    public void checkUser(String studentNumber) {
-        myDB = db_OpenHelper.getWritableDatabase();
-        Cursor cursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "= ?",new String[]{studentNumber});
-         //Add code in here
-        if(cursor.getCount() > 0){
-            Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
         }
     }
 
-    }
+
 
 
 

@@ -28,10 +28,6 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
 
-    //Student Number and password used to login.
-    //This is just for testing purposes
-    //long validStudentNumber = 217203027;
-    //String validPassword = "Breyton";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +42,7 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.login);
         btnRegister = findViewById(R.id.register);
 
-        chk3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (isChecked) {
-                    studentPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
-                } else {
-                    studentPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                }
-            }
-        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +58,7 @@ public class Login extends AppCompatActivity {
                 String stuNum = studentNumber.getText().toString();
                 String userPw = studentPassword.getText().toString();
                 //Take out this code statement if it it not working or mess up the functionality
-                cursor = db.rawQuery("SELECT * FROM "+DataBaseHelper.DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "=? AND " + DataBaseHelper.COLUMN_5+ "=?", new String[]{stuNum, userPw});
+                cursor = db.rawQuery("SELECT * FROM "+DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "=? AND " + DataBaseHelper.COLUMN_5+ "=?", new String[]{stuNum, userPw});
 
                 if (TextUtils.isEmpty(studentNumber.getText().toString()) || TextUtils.isEmpty(studentPassword.getText().toString())) {
                     Toast.makeText(Login.this, "Fields Cannot Be Empty", Toast.LENGTH_LONG).show();
@@ -87,13 +72,19 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    //This is just a dummy link activity. Takes user to next page when login was success
-    public void mainActivity() {
-        Intent open = new Intent(this, MainActivity.class);
-        startActivity(open);
+        chk3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                if (isChecked) {
+                    studentPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+
+                } else {
+                    studentPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+            }
+        });
     }
 
     public void timetable() {
