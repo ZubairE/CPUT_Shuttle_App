@@ -12,12 +12,11 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -30,6 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText txtLastName;
     EditText studNumber;
     EditText password;
+    TextView txtLink;//Take out if not working
     CheckBox chk;
     EditText cellNo;
     Button btnRegister;
@@ -59,6 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
         cellNo = findViewById(R.id.cpw);
         btnRegister = findViewById(R.id.register);
         btnBack = findViewById(R.id.back);
+        txtLink = findViewById(R.id.linkDeregister);//Take out if not working
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +126,16 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+
+        txtLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent toDeRegistration = new Intent(RegistrationActivity.this, DeRegister.class);
+                startActivity(toDeRegistration);
+                //deRegister();
+            }
+        });
     }
 
     public void goBack() {
@@ -141,6 +152,13 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
     }
+    //Take out this method if it is not working or cause probles
+    /*public void deRegister() {
+        Intent toDeRegistration = new Intent(this, DeRegistration.class);
+        startActivity(toDeRegistration);*/
+
+        //Fix this
+    //}
 
     //public 'void' insertData is the actual method.
     public void insertData(String name, String surname, String stuNum, String userPw, String cellNum) {
@@ -153,9 +171,8 @@ public class RegistrationActivity extends AppCompatActivity {
         contentValues.put(DataBaseHelper.COLUMN_6, cellNum);
         long id = myDB.insert(DataBaseHelper.MY_DB_TABLE_NAME, null, contentValues);
         }
-    }
 
-
+}
 
 
 

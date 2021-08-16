@@ -42,12 +42,14 @@
         android:gravity="start|top"
         android:inputType="textCapWords"
         android:maxLength="20"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintVertical_bias="0.285"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -67,15 +69,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:maxLength="20"
         android:gravity="start|top"
         android:inputType="textCapWords"
+        android:maxLength="20"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.411"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView6"
@@ -131,16 +135,18 @@
         android:id="@+id/stuNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:digits="1234567890"
         android:ems="10"
         android:inputType="number"
         android:maxLength="9"
-        android:digits="1234567890"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.543"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView7"
@@ -154,7 +160,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.62" />
-    
+
     <EditText
         android:id="@+id/pw"
         android:layout_width="wrap_content"
@@ -162,17 +168,19 @@
         android:ems="10"
         android:inputType="textPassword"
         android:maxLength="15"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.67"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <CheckBox
         android:id="@+id/chk"
         android:layout_width="125dp"
-        android:layout_height="35dp"
+        android:layout_height="48dp"
         android:text="Show password"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -202,11 +210,28 @@
         android:ems="10"
         android:inputType="number"
         android:maxLength="10"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintVertical_bias="0.792"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/linkDeregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:minHeight="48dp"
+        android:text="De-register?"
+        android:textColor="@color/design_default_color_error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

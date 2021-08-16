@@ -1,5 +1,7 @@
 package za.ac.cput_shuttleapp;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,10 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class DeRegistration extends AppCompatActivity {
+public class DeRegister extends AppCompatActivity {
     SQLiteDatabase db;
     SQLiteOpenHelper myDB_Helper;
     Button deRstr;
@@ -21,10 +20,12 @@ public class DeRegistration extends AppCompatActivity {
     EditText stdNum;
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_de_register);
+
         deRstr = findViewById(R.id.deRegister);
-        back = findViewById(R.id.back);
+        back = findViewById(R.id.goBack);
         stdNum = findViewById(R.id.stuNum);
 
         deRstr.setOnClickListener(new View.OnClickListener() {
@@ -34,11 +35,11 @@ public class DeRegistration extends AppCompatActivity {
                 db = myDB_Helper.getWritableDatabase();
 
                 if(TextUtils.isEmpty(stdNum.getText().toString())){
-                    Toast.makeText(DeRegistration.this,"Please complete the details",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DeRegister.this,"Please complete the details",Toast.LENGTH_LONG).show();
                     //Needs code
                 }else if(stdNum.getText().toString().equals(stuNum)){
-                        deletStudent(stuNum);
-                        Toast.makeText(DeRegistration.this, "De-Registration Success",Toast.LENGTH_LONG).show();
+                    deletStudent(stuNum);
+                    Toast.makeText(DeRegister.this, "De-Registration Success",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -50,13 +51,14 @@ public class DeRegistration extends AppCompatActivity {
             }
         });
 
-        }
+    }
     public void goBack(){
         Intent back = new Intent(this, RegistrationActivity.class);
         startActivity(back);
     }
     public void deletStudent(String studentNumber){
-       // db = myDB_Helper.getWritableDatabase();
+        db = myDB_Helper.getWritableDatabase();
         db.delete(DataBaseHelper.MY_DB_TABLE_NAME, DataBaseHelper.COLUMN_4,new String[]{studentNumber});
     }
-}
+
+    }
