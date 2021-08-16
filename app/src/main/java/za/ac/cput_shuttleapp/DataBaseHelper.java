@@ -32,4 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MY_DB_TABLE_NAME);
         onCreate(db);
     }
+
+    //Remove this method if it doesn't work.
+
 }
