@@ -92,15 +92,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 }else if(!PASSWORD_PATTERN.matcher(userPw).matches()) {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
-
-                  /*} else if (txtFirstName.getText().toString().equals(name) || txtLastName.getText().toString().equals(surname) ||
-                        studNumber.getText().toString().equals(stuNum) || password.getText().toString().equals(userPw) ||
-                        cellNo.getText().toString().equals(cellNum)) {
-                    insertData(name, surname, stuNum, userPw, cellNum);
-                    Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
-                    //timetable();
-                    login();*/
-
                 }
             }
         });
