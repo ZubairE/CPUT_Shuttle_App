@@ -152,13 +152,6 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
     }
-    //Take out this method if it is not working or cause probles
-    /*public void deRegister() {
-        Intent toDeRegistration = new Intent(this, DeRegistration.class);
-        startActivity(toDeRegistration);*/
-
-        //Fix this
-    //}
 
     //public 'void' insertData is the actual method.
     public void insertData(String name, String surname, String stuNum, String userPw, String cellNum) {
