@@ -29,7 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText txtLastName;
     EditText studNumber;
     EditText password;
-    TextView txtLink;//Take out if not working
+    TextView txtLink;
     CheckBox chk;
     EditText cellNo;
     Button btnRegister;
@@ -61,7 +61,6 @@ public class RegistrationActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.back);
         txtLink = findViewById(R.id.linkDeregister);//Take out if not working
 
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,16 +78,18 @@ public class RegistrationActivity extends AppCompatActivity {
                         TextUtils.isEmpty(cellNo.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
-                    //Checks if user exist
+                    //Checks if student number already exists exist
                 }else if(myCursor.getCount() > 0){
                     Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
                     //*************************
 
+                //If student number is not in the table,this statement executes
                 }else if(PASSWORD_PATTERN.matcher(userPw).matches()) {
                     insertData(name, surname, stuNum, userPw, cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
 
+                //requires that the password should be 8+ characters long
                 }else if(!PASSWORD_PATTERN.matcher(userPw).matches()) {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
@@ -96,6 +97,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        //Takes student to previous page(login page)
         btnBack = findViewById(R.id.back);
         btnBack.setOnClickListener(new View.OnClickListener() {
 
@@ -105,6 +107,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        //Toggle password visibility(show/hide password)
         chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -118,6 +121,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        //Takes student to the deregsiter page
         txtLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,24 +133,26 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
+    //method for back button
     public void goBack() {
         Intent back = new Intent(this, Login.class);
         startActivity(back);
     }
 
+    //Takes student to timetable page
     public void timetable() {
         Intent timetable = new Intent(this, Timetable.class);
         startActivity(timetable);
     }
 
+    //Takes user back to login page
     public void login() {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
     }
 
-    //public 'void' insertData is the actual method.
+    //insert/adds student to the database
     public void insertData(String name, String surname, String stuNum, String userPw, String cellNum) {
-        //This method was added on the 30th of July 2021. Must take it out if it not works.
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseHelper.COLUMN_2, name);
         contentValues.put(DataBaseHelper.COLUMN_3, surname);
