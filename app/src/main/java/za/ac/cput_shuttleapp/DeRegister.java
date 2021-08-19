@@ -36,15 +36,16 @@ public class DeRegister extends AppCompatActivity {
             public void onClick(View v) {
                 String stuNum = stdNum.getText().toString();
 
-                if(TextUtils.isEmpty(stdNum.getText().toString())){
-                    Toast.makeText(DeRegister.this,"Please complete the details",Toast.LENGTH_LONG).show();
+                if(TextUtils.isEmpty(stdNum.getText().toString())) {
+                    Toast.makeText(DeRegister.this, "Please complete the details", Toast.LENGTH_LONG).show();
 
-                }else if(stdNum.getText().toString().equals(stuNum)){
+                //If student enters student number.It removes his/her data from the database
+                }else if(stdNum.getText().toString().equals(stuNum)) {
                     deletStudent(stuNum);
-                    Toast.makeText(DeRegister.this, "De-Registration Success",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DeRegister.this, "De-Registration Success", Toast.LENGTH_LONG).show();
 
                 }else{
-                    Toast.makeText(DeRegister.this,"Student number not found",Toast.LENGTH_LONG).show();
+                    stdNum.setError("Student number does not exist");
                 }
             }
         });
@@ -57,12 +58,15 @@ public class DeRegister extends AppCompatActivity {
         });
 
     }
+    //Takes student back to registration page
     public void goBack(){
         Intent back = new Intent(this, RegistrationActivity.class);
         startActivity(back);
+
     }
+    //Deletes student record from the table
     public Integer deletStudent(String student_Number){
-        String stuNum = stdNum.getText().toString();
+        //String stuNum = stdNum.getText().toString();
         db = myDB_Helper.getWritableDatabase();
         return db.delete(DataBaseHelper.MY_DB_TABLE_NAME,DataBaseHelper.COLUMN_4+ "= ?", new String[]{student_Number});
 
