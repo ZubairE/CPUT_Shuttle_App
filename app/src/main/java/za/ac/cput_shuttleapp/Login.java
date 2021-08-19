@@ -28,7 +28,6 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +41,7 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.login);
         btnRegister = findViewById(R.id.register);
 
-
-
+        //Takes user to the registartion page. When button is clicked
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,27 +50,32 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Login button
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String stuNum = studentNumber.getText().toString();
                 String userPw = studentPassword.getText().toString();
-                //Take out this code statement if it it not working or mess up the functionality
                 cursor = db.rawQuery("SELECT * FROM "+DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "=? AND " + DataBaseHelper.COLUMN_5+ "=?", new String[]{stuNum, userPw});
 
+                //If user leave's a field empty, a pop-up message will display that indicates that the user should complete all fields
                 if (TextUtils.isEmpty(studentNumber.getText().toString()) || TextUtils.isEmpty(studentPassword.getText().toString())) {
                     Toast.makeText(Login.this, "Fields Cannot Be Empty", Toast.LENGTH_LONG).show();
+
+                //Goes through database and checks if user exists
                 } else if (cursor != null && cursor.getCount() > 0){
                     cursor.moveToNext();//take out if not work
                     Toast.makeText(Login.this, "Welcome to CPUT-Shuttle App!", Toast.LENGTH_LONG).show();
                     timetable();//Opens the timetable page after user entered login details
 
+                //If user does not exist
                 } else {
                     Toast.makeText(Login.this, "Student does not exist.Register Instead?", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
+        //Toggle password visibility(show/hide) password
         chk3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -87,6 +90,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    //Takes user to timetable page
     public void timetable() {
         Intent timetable = new Intent(this, Timetable.class);
         startActivity(timetable);

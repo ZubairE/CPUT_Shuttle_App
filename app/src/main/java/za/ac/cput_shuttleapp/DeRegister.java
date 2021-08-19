@@ -36,6 +36,7 @@ public class DeRegister extends AppCompatActivity {
             public void onClick(View v) {
                 String stuNum = stdNum.getText().toString();
 
+                //If user enters nothing and press the button a pop-up message should appear.
                 if(TextUtils.isEmpty(stdNum.getText().toString())) {
                     Toast.makeText(DeRegister.this, "Please complete the details", Toast.LENGTH_LONG).show();
 
@@ -50,6 +51,7 @@ public class DeRegister extends AppCompatActivity {
             }
         });
 
+        //This method calls the "goBack()" method and takes user back to registration page
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +60,7 @@ public class DeRegister extends AppCompatActivity {
         });
 
     }
+
     //Takes student back to registration page
     public void goBack(){
         Intent back = new Intent(this, RegistrationActivity.class);
