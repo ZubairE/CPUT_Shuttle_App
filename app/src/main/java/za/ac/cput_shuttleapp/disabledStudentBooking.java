@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.List;
 
 import static za.ac.cput_shuttleapp.R.drawable.logo;
 
@@ -47,9 +48,9 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disabled_student_booking);
 
-
         ImageView myImageView = (ImageView) findViewById(R.id.imageView);
         myImageView.setImageResource(logo);
+
         TextView tv = findViewById(R.id.textView);
         tv.setMovementMethod(new ScrollingMovementMethod());
         TextView tv2 = findViewById(R.id.textView2);
@@ -59,30 +60,30 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
 
 
         //Creating the instance of Spinner
-        Spinner spin = (Spinner) findViewById(R.id.spinner2);
-        spin.setOnItemSelectedListener(this);
+        Spinner disability = (Spinner) findViewById(R.id.spinner2);
+        disability.setOnItemSelectedListener(this);
         TextView tv3 = findViewById(R.id.textView3);
         tv3.setMovementMethod(new ScrollingMovementMethod());
         //Creating the ArrayAdapter
-        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, disability);
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, (List) disability);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
+        disability.setAdapter(aa);
 
-        Spinner spin2 = (Spinner) findViewById(R.id.spinner);
-        spin2.setOnItemSelectedListener(this);
+        Spinner From = (Spinner) findViewById(R.id.spinner);
+        From.setOnItemSelectedListener(this);
         TextView tv4 = findViewById(R.id.textView4);
         tv4.setMovementMethod(new ScrollingMovementMethod());
         ArrayAdapter aa2 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, from);
         aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin2.setAdapter(aa2);
+        From.setAdapter(aa2);
 
-        Spinner spin3 = (Spinner) findViewById(R.id.spinner);
-        spin2.setOnItemSelectedListener(this);
+        Spinner To = (Spinner) findViewById(R.id.spinner);
+        To.setOnItemSelectedListener(this);
         TextView tv5 = findViewById(R.id.textView5);
         tv4.setMovementMethod(new ScrollingMovementMethod());
         ArrayAdapter aa3 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, to);
         aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin2.setAdapter(aa3);
+        To.setAdapter(aa3);
 
         date = (TextView) findViewById(R.id.date);
         date.setOnClickListener(new View.OnClickListener() {
