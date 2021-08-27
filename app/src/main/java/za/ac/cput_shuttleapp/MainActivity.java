@@ -87,20 +87,20 @@ public class MainActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Cursor res= Db.getAllData();
-                            if(res.getCount()==0){
-                                showMessage("Error","Nothing found");
+                            Cursor res = Db.getAllData();
+                            if (res.getCount() == 0) {
+                                showMessage("Error", "Nothing found");
                                 return;
                             }
 
-                            StringBuffer buffer= new StringBuffer();
-                            while(res.moveToNext()) {
-                                buffer.append("ID:"+res.getString(0)+"\n");
-                                buffer.append("Number:"+res.getString(1)+"\n");
-                                buffer.append("Password:"+res.getString(2)+"\n");
+                            StringBuffer buffer = new StringBuffer();
+                            while (res.moveToNext()) {
+                                buffer.append("ID:" + res.getString(0) + "\n");
+                                buffer.append("Number:" + res.getString(1) + "\n");
+                                buffer.append("Password:" + res.getString(2) + "\n");
 
                             }
-                            showMessage("Data",buffer.toString());
+                            showMessage("Data", buffer.toString());
 
 
                         }
