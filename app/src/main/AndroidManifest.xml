@@ -9,14 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CPUT_ShuttleApp">
-        <activity android:name=".disabledStudentBooking"></activity>
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".disabledStudentBooking" />
+             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
 
-</manifest>
+            </intent-filter>
+
+
+
+<activity
+android:name=".MainActivity" />
+    android:exported="true">
+<intent-filter>
+
+<action android:name="android.intent.action.MAIN" />
+<category android:name="android.intent.category.LAUNCHER" />
+
+</intent-filter>
+
+    </application>
+    </manifest>

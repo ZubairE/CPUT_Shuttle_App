@@ -10,10 +10,13 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.Nullable;
+
+import org.w3c.dom.Text;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -38,9 +41,8 @@ public class Database extends SQLiteOpenHelper {
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     private Context context;
 
-    public Database(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-
+    public Database(@Nullable Context context) {
+        super(context,DATABASE_NAME,null,DATABASE_Version);
     }
 
 
@@ -63,17 +65,18 @@ public class Database extends SQLiteOpenHelper {
     }
 
 
-    public void insertData(Integer booking_Id, String DISABILITY, String FROM, String To, String DATE, String TIME) {
+    public void insertData(String DISABILITY, String FROM, String To, String DATE, String TIME) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(BOOKING_ID, BOOKING_ID);
         values.put(DISABILITY, DISABILITY);
         values.put(FROM, FROM);
         values.put(To, To);
         values.put(DATE, DATE);
         values.put(TIME, TIME);
         db.insert("disabledBooking ", null, values);
+
+
     }
 
     public String getData() {
@@ -115,20 +118,15 @@ public class Database extends SQLiteOpenHelper {
         int numRows= (int ) DatabaseUtils.queryNumEntries(db, TABLE_NAME);
         return numRows;
     }
-    public ArrayList<String> getAllDisabledBooking(){
-        ArrayList<String> array_List =new ArrayList<String>();
+public  Cursor getAllData(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor c=db.rawQuery("select* from " + TABLE_NAME, null);
+        return c;
 
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor res =db.rawQuery("select *from disabledBooking",null);
-        res.moveToFirst();
-
-        while (res.isAfterLast()== false){
-            array_List.add(res.getString (res.getColumnIndex(TABLE_NAME)));
-            res.moveToNext();
+            }
         }
-        return array_List;
-    }
-}
+
+
 
 
 

@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.TimePicker;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -36,17 +38,20 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
     private Button buttonBack;
     private Button buttonNext;
     private Button buttonConfirm;
+    private Database database;
     TextView date;
     DatePickerDialog datePickerDialog;
     TextView time;
     TimePickerDialog mTimePicker;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disabled_student_booking);
+
+        database = new Database(this);
+        AddData();
 
         ImageView myImageView = (ImageView) findViewById(R.id.imageView);
         myImageView.setImageResource(logo);
@@ -86,7 +91,7 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
         To.setAdapter(aa3);
 
         date = (TextView) findViewById(R.id.date);
-        date.setOnClickListener(new View.OnClickListener() {
+        date.setOnClickListener(new OnClickListener() {
 
 
             @Override
@@ -107,7 +112,7 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
 
 
         time = (TextView) findViewById(R.id.time);
-        time.setOnClickListener(new View.OnClickListener() {
+        time.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar mCurrentTime = Calendar.getInstance();
@@ -127,8 +132,6 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
     }
 
 
-
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -141,9 +144,10 @@ public class disabledStudentBooking extends AppCompatActivity implements Adapter
 
     public void addListenerOnButton() {
         buttonBack = (Button) findViewById(R.id.button);
-buttonNext= (Button) findViewById(R.id.buttonNext);
-buttonConfirm= (Button) findViewById(R.id.buttonConfirm);
-buttonBack.setOnClickListener(new View.OnClickListener() {
+        buttonNext = (Button) findViewById(R.id.buttonNext);
+        buttonConfirm = (Button) findViewById(R.id.buttonConfirm);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -153,8 +157,28 @@ buttonBack.setOnClickListener(new View.OnClickListener() {
         });
     }
 
+    private void AddData() {
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+                String DISABILITY = disability.getClass().toString();
+                String FROM = from.getClass().toString();
+                String TO = to.getClass().toString();
+                String DATE = date.getClass().toString();
+                String TIME = time.getText().toString();
+                database.insertData(DISABILITY, FROM, TO, DATE, TIME);
+
+
+            }
+
+        });
     }
+}
+
+
+
 
 
 
