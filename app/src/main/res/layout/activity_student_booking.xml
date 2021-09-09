@@ -101,6 +101,7 @@
             android:layout_marginStart="81dp"
             android:layout_marginTop="49dp"
             android:hint="@string/check_campus"
+            android:minHeight="48dp"
             android:padding="8dp" />
 
         <EditText
@@ -113,6 +114,7 @@
             android:layout_marginTop="40dp"
             android:hint="@string/check_res"
             android:importantForAutofill="no"
+            android:minHeight="48dp"
             android:padding="8dp" />
 
         <EditText
@@ -125,6 +127,7 @@
             android:layout_marginTop="40dp"
             android:hint="@string/check_time"
             android:importantForAutofill="no"
+            android:minHeight="48dp"
             android:padding="8dp" />
 
         <EditText
@@ -136,6 +139,7 @@
             android:layout_marginStart="81dp"
             android:layout_marginTop="40dp"
             android:hint="@string/check_date"
+            android:minHeight="48dp"
             android:padding="8dp" />
 
         <Button
