@@ -1,6 +1,7 @@
 package za.ac.cput_shuttleapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -64,7 +65,7 @@ public class StudentBooking extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                back();
             }
         });
 
@@ -78,6 +79,11 @@ public class StudentBooking extends AppCompatActivity {
         contentValues.put(BookingDatabase.COL_5, date);
         long id = myDb.insert(BookingDatabase.TABLE_NAME, null, contentValues);
 
+    }
+
+    public void back(){
+        Intent back = new Intent(this,Timetable.class);
+        startActivity(back);
     }
 
 }

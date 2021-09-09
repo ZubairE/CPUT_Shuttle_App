@@ -162,7 +162,7 @@
             android:layout_marginStart="42dp"
             android:layout_marginTop="-8dp"
             android:padding="10dp"
-            android:text="@string/cancel_delete">
+            android:text="BACK">
 
         </Button>
 
@@ -172,10 +172,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/button_save"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="-8dp"
+            android:layout_marginLeft="154dp"
+            android:layout_marginTop="-4dp"
             android:layout_toRightOf="@id/button_delete"
             android:padding="10dp"
-            android:text="@string/exit_out">
+            android:text="Next">
 
         </Button>
 
