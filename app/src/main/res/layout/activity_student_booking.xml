@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00F2FE"
     android:orientation="vertical"
-    tools:context=".StudentBooking">
+    tools:context=".StudentBooking"
+    android:background="@drawable/malibu_beach_background">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
