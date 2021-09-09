@@ -61,6 +61,13 @@ public class StudentBooking extends AppCompatActivity {
             }
         });
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
     public void insertDetails(String departure,String destination,String time,String date){
