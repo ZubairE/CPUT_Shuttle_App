@@ -1,5 +1,21 @@
 <resources>
+    <string name="logo">LOGO</string>
+    <string name="heading_one">TICKET BOOKING</string>
+    <string name="heading_two">LOCATION DETAILS</string>
+    <string name="text_from">From</string>
+    <string name="text_to">To</string>
+    <string name="text_time">Time</string>
+    <string name="text_date">Date</string>
     <string name="app_name">CPUT_ShuttleApp</string>
+
+    <string name="proceed_save">PROCEED</string>
+    <string name="cancel_delete">CANCEL</string>
+    <string name="exit_out">SIGN-OUT</string>
+    <string name="check_campus">CPUT Campus</string>
+    <string name="check_time">hh:mm</string>
+    <string name="check_res">Orchard Residence</string>
+    <string name="check_date">dd/mm/yyyy</string>
+
     <string name="student_number">Student Number</string>
     <string name="password">Password</string>
     <string name="registration">Registration</string>
