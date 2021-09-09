@@ -24,6 +24,9 @@ public class StudentBooking extends AppCompatActivity {
     Button btnAddData;
     Button btnDelete;
 
+    //Take out if not working
+    int counter = 30;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +54,10 @@ public class StudentBooking extends AppCompatActivity {
                     Toast.makeText(StudentBooking.this, "Fields Incomplete", Toast.LENGTH_LONG).show();
 
                 }else if(editFrom.getText().toString().equals(dep)&&((editTo.getText().toString().equals(des)&&(editTime.getText().toString().equals(time)
-                        &&(editDate.getText().toString().equals(date)))))){
+                        &&(editDate.getText().toString().equals(date) && (counter != 0)))))){
                     insertDetails(dep,des,time,date);
-                    Toast.makeText(StudentBooking.this,"Booking has been made",Toast.LENGTH_LONG).show();
+                   int dec = counter--;
+                    Toast.makeText(StudentBooking.this,"Booking has been made.Seats available: " + dec,Toast.LENGTH_LONG).show();
 
                 }else{
                     Toast.makeText(StudentBooking.this,"Booking failed",Toast.LENGTH_LONG).show();
