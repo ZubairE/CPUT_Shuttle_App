@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textView4" type="id">@+id/textView4</item>
+    <item name="textView5" type="id">@+id/textView5</item>
+    <item name="date" type="id">@+id/date</item>
+    <item name="cnfrm" type="id">@+id/cnfrm</item>
+    <item name="editTextTextMultiLine" type="id">@+id/editTextTextMultiLine</item>
+    <item name="editTextTextMultiLine2" type="id">@+id/editTextTextMultiLine2</item>
+    <item name="editTextTextMultiLine3" type="id">@+id/editTextTextMultiLine3</item>
+    <item name="editTextTextMultiLine4" type="id">@+id/editTextTextMultiLine4</item>
+    <item name="editTextTextMultiLine5" type="id">@+id/editTextTextMultiLine5</item>
+</resources>
