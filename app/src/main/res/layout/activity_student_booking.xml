@@ -29,10 +29,9 @@
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:color="@color/black"
+            android:textColor="@color/black"
             android:textSize="27sp"
             android:text="@string/heading_one" />
-
 
         <TextView
             android:id="@+id/header_body"
@@ -41,7 +40,7 @@
             android:layout_below="@+id/header_title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="21dp"
-            android:color="@color/black"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:text="@string/heading_two" />
 
@@ -53,6 +52,7 @@
             android:layout_marginStart="48dp"
             android:layout_marginTop="50dp"
             android:padding="17dp"
+            android:textColor="@color/black"
             android:text="@string/text_from" />
 
         <TextView
@@ -62,6 +62,7 @@
             android:text="@string/text_to"
             android:layout_below="@+id/text_from"
             android:padding="17dp"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginStart="50dp"
             />
@@ -74,6 +75,7 @@
             android:text="@string/text_time"
             android:layout_below="@+id/text_to"
             android:padding="17dp"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginStart="50dp"
             />
@@ -85,6 +87,7 @@
             android:text="@string/text_date"
             android:layout_below="@+id/text_time"
             android:padding="17dp"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginStart="50dp"
             />
@@ -164,8 +167,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/button_save"
-            android:layout_marginStart="148dp"
-            android:layout_marginTop="-1dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="-8dp"
+            android:layout_toRightOf="@id/button_delete"
             android:padding="10dp"
             android:text="@string/exit_out">
 

@@ -11,7 +11,7 @@
     <string name="cancel_delete">CANCEL</string>
     <string name="exit_out">SIGN-OUT</string>
     <string name="check_campus">CPUT Campus</string>
-    <string name="check_time">9:00</string>
-    <string name="check_res">Orchard Res</string>
-    <string name="check_date">dd/mm/yy</string>
+    <string name="check_time">hh:mm</string>
+    <string name="check_res">Orchard Residence</string>
+    <string name="check_date">dd/mm/yyyy</string>
 </resources>
