@@ -94,5 +94,6 @@ public class Login extends AppCompatActivity {
     public void timetable() {
         Intent timetable = new Intent(this, Timetable.class);
         startActivity(timetable);
+        finish();
     }
 }
