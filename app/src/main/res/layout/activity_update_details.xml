@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.249" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/updateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.372" />
 
     <EditText
-        android:id="@+id/lastname"
+        android:id="@+id/updateLastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -105,7 +105,7 @@
         app:layout_constraintVertical_bias="0.712" />
 
     <EditText
-        android:id="@+id/stuNum"
+        android:id="@+id/stuNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:digits="1234567890"
@@ -136,7 +136,7 @@
         app:layout_constraintVertical_bias="0.497" />
 
     <EditText
-        android:id="@+id/cpw"
+        android:id="@+id/updateCell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
