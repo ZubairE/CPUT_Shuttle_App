@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import static za.ac.cput_shuttleapp.R.drawable.logo;
 
-public class disabledStudentBooking extends AppCompatActivity{
+public class disabledStudentBooking extends AppCompatActivity {
     SQLiteDatabase db;
     SQLiteOpenHelper openHelper;
 
@@ -91,6 +92,14 @@ public class disabledStudentBooking extends AppCompatActivity{
                 System.exit(0);
             }
         });
+
+        buttonBack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back();
+            }
+        });
+
     }
 
     public void addBooking(String disability, String from, String to, String date, String time) {
@@ -104,9 +113,11 @@ public class disabledStudentBooking extends AppCompatActivity{
 
     }
 
-
+    public void back() {
+        Intent back = new Intent(this,StudentBooking.class);
+        startActivity(back);
+    }
 }
-
 
 
 
