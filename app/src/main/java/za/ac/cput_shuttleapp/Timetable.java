@@ -66,5 +66,6 @@ public class Timetable extends AppCompatActivity {
     public void booking(){
         Intent book = new Intent(this,StudentBooking.class);
         startActivity(book);
+        finish();
     }
 }
