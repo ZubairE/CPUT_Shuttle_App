@@ -23,6 +23,7 @@ public class StudentBooking extends AppCompatActivity {
     EditText editDate;
     Button btnAddData;
     Button btnDelete;
+    Button btnNext;
 
     //Take out if not working
     int counter = 30;
@@ -39,6 +40,8 @@ public class StudentBooking extends AppCompatActivity {
         editDate = findViewById(R.id.editDate);
         btnAddData = findViewById(R.id.button_save);
         btnDelete = findViewById(R.id.button_delete);
+        btnNext = findViewById(R.id.button_exit);
+
 
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,13 @@ public class StudentBooking extends AppCompatActivity {
             }
         });
 
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next();
+            }
+        });
+
     }
 
     public void insertDetails(String departure,String destination,String time,String date){
@@ -88,6 +98,11 @@ public class StudentBooking extends AppCompatActivity {
     public void back(){
         Intent back = new Intent(this,Timetable.class);
         startActivity(back);
+    }
+
+    public void next(){
+        Intent next = new Intent(this,disabledStudentBooking.class);
+        startActivity(next);
     }
 
 }
