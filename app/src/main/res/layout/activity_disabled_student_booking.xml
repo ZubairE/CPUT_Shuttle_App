@@ -125,7 +125,7 @@
         android:id="@+id/nxt"
         android:layout_width="108dp"
         android:layout_height="48dp"
-        android:text="SIGNOUT"
+        android:text="Exit"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="normal"
