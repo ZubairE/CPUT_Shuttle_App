@@ -3,6 +3,7 @@ package za.ac.cput_shuttleapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
@@ -89,7 +90,10 @@ public class disabledStudentBooking extends AppCompatActivity {
         buttonNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 System.exit(0);
+
+
             }
         });
 

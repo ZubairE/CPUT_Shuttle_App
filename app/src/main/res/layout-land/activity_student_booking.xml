@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StudentBooking"
+    android:background="@drawable/malibu_beach_background">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/download__1_" />
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:textSize="27sp"
+            android:text="@string/heading_one" />
+
+        <TextView
+            android:id="@+id/header_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:text="@string/heading_two" />
+
+        <TextView
+            android:id="@+id/text_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_body"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="50dp"
+            android:padding="17dp"
+            android:textColor="@color/black"
+            android:text="@string/text_from" />
+
+        <TextView
+            android:id="@+id/text_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_to"
+            android:layout_below="@+id/text_from"
+            android:padding="17dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            />
+
+        <TextView
+
+            android:id="@+id/text_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time"
+            android:layout_below="@+id/text_to"
+            android:padding="17dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            />
+
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_date"
+            android:layout_below="@+id/text_time"
+            android:padding="17dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="50dp"
+            />
+
+        <EditText
+            android:id="@+id/editFrom"
+            android:layout_width="258dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_body"
+            android:layout_alignStart="@id/text_from"
+            android:layout_marginStart="81dp"
+            android:layout_marginTop="49dp"
+            android:hint="@string/check_campus"
+            android:inputType="textCapWords"
+            android:maxLength="20"
+            android:minHeight="48dp"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTo"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editFrom"
+            android:layout_alignStart="@id/text_to"
+            android:layout_marginStart="81dp"
+            android:layout_marginTop="40dp"
+            android:hint="@string/check_res"
+            android:importantForAutofill="no"
+            android:maxLength="20"
+            android:inputType="textCapWords"
+            android:minHeight="48dp"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editTime"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTo"
+            android:layout_alignStart="@id/text_to"
+            android:layout_marginStart="81dp"
+            android:layout_marginTop="40dp"
+            android:hint="@string/check_time"
+            android:inputType="textCapWords"
+            android:importantForAutofill="no"
+            android:maxLength="5"
+            android:minHeight="48dp"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/editDate"
+            android:layout_width="242dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTime"
+            android:layout_alignStart="@id/text_date"
+            android:layout_marginStart="81dp"
+            android:layout_marginTop="40dp"
+            android:inputType="textCapWords"
+            android:hint="@string/check_date"
+            android:maxLength="10"
+            android:minHeight="48dp"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editDate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:padding="10dp"
+            android:text="@string/proceed_save">
+
+        </Button>
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_save"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="-8dp"
+            android:padding="10dp"
+            android:text="BACK">
+
+        </Button>
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_save"
+            android:layout_marginStart="100dp"
+            android:layout_marginLeft="154dp"
+            android:layout_marginTop="-4dp"
+            android:layout_toRightOf="@id/button_delete"
+            android:padding="10dp"
+            android:text="Next">
+
+        </Button>
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
