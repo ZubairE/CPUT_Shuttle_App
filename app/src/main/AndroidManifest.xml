@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CPUT_ShuttleApp">
 
+
+        <activity
+            android:name=".disabledStudentBooking"
+
         <activity android:name=".Login">
 
             <intent-filter>
@@ -29,6 +33,7 @@
 
         <activity
             android:name=".DeRegister"
+
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!-- Take out if this cause errors -->
         <!-- Did cause errors previously -->
         <activity android:name=".Timetable">
@@ -64,4 +70,14 @@
         </activity>
     </application>
 
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>
