@@ -35,6 +35,9 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btnRegister;
     Button btnBack;
 
+    //Take out if not working
+    TextView txtUpdate;
+
     public static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +             //The pw requires at least one digit
             "(?=.*[a-z])" +             //The pw requires at least one small letter
@@ -60,6 +63,7 @@ public class RegistrationActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.register);
         btnBack = findViewById(R.id.back);
         txtLink = findViewById(R.id.linkDeregister);//Take out if not working
+        txtUpdate = findViewById(R.id.update);//Take out if not working
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +74,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String userPw = password.getText().toString();
                 String cellNum = cellNo.getText().toString();
                 myDB = db_OpenHelper.getWritableDatabase();
-                Cursor myCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME+ " WHERE " + DataBaseHelper.COLUMN_4+ "= ?",new String[]{stuNum});
+                Cursor myCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME + " WHERE " + DataBaseHelper.COLUMN_4 + "= ?", new String[]{stuNum});
 
                 //Requires that all fields must be completed
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
@@ -79,18 +83,18 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
                     //Checks if student number already exists exist
-                }else if(myCursor.getCount() > 0){
-                    Toast.makeText(RegistrationActivity.this,"Student number already in use",Toast.LENGTH_LONG).show();
+                } else if (myCursor.getCount() > 0) {
+                    Toast.makeText(RegistrationActivity.this, "Student number already in use", Toast.LENGTH_LONG).show();
                     //*************************
 
-                //If student number is not in the table,this statement executes
-                }else if(PASSWORD_PATTERN.matcher(userPw).matches()) {
+                    //If student number is not in the table,this statement executes
+                } else if (PASSWORD_PATTERN.matcher(userPw).matches()) {
                     insertData(name, surname, stuNum, userPw, cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
 
-                //requires that the password should be 8+ characters long
-                }else if(!PASSWORD_PATTERN.matcher(userPw).matches()) {
+                    //requires that the password should be 8+ characters long
+                } else if (!PASSWORD_PATTERN.matcher(userPw).matches()) {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
                 }
@@ -131,6 +135,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 //deRegister();
             }
         });
+
+        txtUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update();
+            }
+        });
     }
 
     //method for back button
@@ -149,6 +160,10 @@ public class RegistrationActivity extends AppCompatActivity {
     public void login() {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
+    }
+    public void update(){
+        Intent update = new Intent(this,UpdateDetails.class);
+        startActivity(update);
     }
 
     //insert/adds student to the database
