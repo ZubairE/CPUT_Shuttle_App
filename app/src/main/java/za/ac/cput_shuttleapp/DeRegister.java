@@ -35,13 +35,16 @@ public class DeRegister extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String stuNum = stdNum.getText().toString();
+                db = myDB_Helper.getWritableDatabase();
+                Cursor myCursor = db.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME + " WHERE " + DataBaseHelper.COLUMN_4 + "= ?", new String[]{stuNum});
 
                 //If user enters nothing and press the button a pop-up message should appear.
                 if(TextUtils.isEmpty(stdNum.getText().toString())) {
                     Toast.makeText(DeRegister.this, "Please complete the details", Toast.LENGTH_LONG).show();
 
                 //If student enters student number.It removes his/her data from the database
-                }else if(stdNum.getText().toString().equals(stuNum)) {
+                }else if(myCursor != null && myCursor.getCount() > 0) {
+                    myCursor.moveToNext();
                     deletStudent(stuNum);
                     Toast.makeText(DeRegister.this, "De-Registration Success", Toast.LENGTH_LONG).show();
 
@@ -70,7 +73,7 @@ public class DeRegister extends AppCompatActivity {
     //Deletes student record from the table
     public Integer deletStudent(String student_Number){
         //String stuNum = stdNum.getText().toString();
-        db = myDB_Helper.getWritableDatabase();
+        //db = myDB_Helper.getWritableDatabase();
         return db.delete(DataBaseHelper.MY_DB_TABLE_NAME,DataBaseHelper.COLUMN_4+ "= ?", new String[]{student_Number});
 
 
