@@ -103,6 +103,8 @@ public class StudentBooking extends AppCompatActivity {
     public void next(){
         Intent next = new Intent(this,disabledStudentBooking.class);
         startActivity(next);
+        //Remove this method if necessary
+        finish();
     }
 
 }
