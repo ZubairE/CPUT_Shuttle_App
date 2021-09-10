@@ -47,6 +47,23 @@ public class disabledStudentBooking extends AppCompatActivity {
     EditText txtDate;
     EditText txtTime;
 
+    private long backPressTime;
+    private Toast backToast;
+
+    @Override
+    public void onBackPressed() {
+
+        if (backPressTime + 2000 > System.currentTimeMillis()){
+            backToast.cancel();
+            super.onBackPressed();
+        return;
+    }else{
+           backToast = Toast.makeText(getBaseContext(),"Press back again to exit",Toast.LENGTH_SHORT);
+           backToast.show();
+        }
+        backPressTime = System.currentTimeMillis();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +110,9 @@ public class disabledStudentBooking extends AppCompatActivity {
                 finish();
                 System.exit(0);
 
-
             }
         });
+
 
         buttonBack.setOnClickListener(new OnClickListener() {
             @Override
