@@ -1,6 +1,5 @@
 <resources>
 
-
     <string name="disability">Disability</string>
     <string name="ticket_booking">TICKET BOOKING</string>
     <string name="from">From</string>
@@ -8,5 +7,67 @@
     <string name="next">Next</string>
     <string name="date">Date</string>
     <string name="app_name">CPUT</string>
+
+    <string name="logo">LOGO</string>
+    <string name="heading_one">TICKET BOOKING</string>
+    <string name="heading_two">LOCATION DETAILS</string>
+    <string name="text_from">From</string>
+    <string name="text_to">To</string>
+    <string name="text_time">Time</string>
+    <string name="text_date">Date</string>
+    <string name="app_name">CPUT_ShuttleApp</string>
+
+    <string name="proceed_save">PROCEED</string>
+    <string name="cancel_delete">CANCEL</string>
+    <string name="exit_out">SIGN-OUT</string>
+    <string name="check_campus">CPUT Campus</string>
+    <string name="check_time">hh:mm</string>
+    <string name="check_res">Orchard Residence</string>
+    <string name="check_date">dd/mm/yyyy</string>
+
+    <string name="student_number">Student Number</string>
+    <string name="password">Password</string>
+    <string name="registration">Registration</string>
+    <string name="fill_in_your_details_below">FILL IN YOUR DETAILS BELOW:</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="enter_student_number">Enter Student Number</string>
+    <string name="register">Register</string>
+
+    <string-array name="Locations">
+
+        <item>Athlone Campus</item>
+        <item>District Six Campus</item>
+        <item>Groote Schuur Hospital</item>
+        <item>Bellville Campus</item>
+        <item>Mowbray Campus</item>
+        <item>Roeland Street Building</item>
+        <item>Media City Building</item>
+        <item>Tygerberg Hospital</item>
+        <item>Granger Bay Campus</item>
+
+    </string-array>
+
+    <string-array name="Locations2">
+
+        <item>District Six Campus</item>
+        <item>Athlone Campus</item>
+        <item>Groote Schuur Hospital</item>
+        <item>Bellville Campus</item>
+        <item>Mowbray Campus</item>
+        <item>Roeland Street Building</item>
+        <item>Media City Building</item>
+        <item>Tygerberg Hospital</item>
+        <item>Granger Bay Campus</item>
+
+    </string-array>
+
+    <string-array name="Days">
+
+        <item>Monday-Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+
+    </string-array>
+
 
 </resources>
