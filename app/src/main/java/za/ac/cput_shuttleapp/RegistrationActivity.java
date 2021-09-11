@@ -88,6 +88,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 String cellNum = cellNo.getText().toString();
                 myDB = db_OpenHelper.getWritableDatabase();
                 Cursor myCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME + " WHERE " + DataBaseHelper.COLUMN_4 + "= ?", new String[]{stuNum});
+                Cursor cellphoneCursor = myDB.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME + " WHERE " + DataBaseHelper.COLUMN_6 + "= ?", new String[]{cellNum});
 
                 //Requires that all fields must be completed
                 if (TextUtils.isEmpty(txtFirstName.getText().toString()) || TextUtils.isEmpty(txtLastName.getText().toString()) ||
@@ -99,6 +100,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else if (myCursor.getCount() > 0) {
                     Toast.makeText(RegistrationActivity.this, "Student number already in use", Toast.LENGTH_LONG).show();
                     //*************************
+
+                }else if(cellphoneCursor.getCount() > 0){
+                    Toast.makeText(RegistrationActivity.this,"Cellphone number already in use", Toast.LENGTH_LONG).show();
 
                     //If student number is not in the table,this statement executes
                 } else if (PASSWORD_PATTERN.matcher(userPw).matches() && (CELL_PATTERN.matcher(cellNum).matches() &&
