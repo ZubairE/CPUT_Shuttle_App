@@ -34,10 +34,23 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText cellNo;
     Button btnRegister;
     Button btnBack;
-
-    //Take out if not working
     TextView txtUpdate;
 
+    //Don't touch this code
+    public static final Pattern STUDENTNUMBER_PATTERN = Pattern.compile("^" +
+            "(?=.*[0-9])" +
+            "(?=\\S+$)" +
+            ".{9,9}" +
+            "$");
+
+    //Don't touch this code.
+    public static final Pattern CELL_PATTERN = Pattern.compile("^" +
+            "(?=.*[0-9])" +
+            "(?=\\S+$)" +
+            ".{10,10}" +
+            "$");
+
+    //Don't touch this code
     public static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +             //The pw requires at least one digit
             "(?=.*[a-z])" +             //The pw requires at least one small letter
@@ -88,15 +101,23 @@ public class RegistrationActivity extends AppCompatActivity {
                     //*************************
 
                     //If student number is not in the table,this statement executes
-                } else if (PASSWORD_PATTERN.matcher(userPw).matches()) {
+                } else if (PASSWORD_PATTERN.matcher(userPw).matches() && (CELL_PATTERN.matcher(cellNum).matches() &&
+                        (STUDENTNUMBER_PATTERN.matcher(stuNum).matches()))){
                     insertData(name, surname, stuNum, userPw, cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
                     login();
 
                     //requires that the password should be 8+ characters long
                 } else if (!PASSWORD_PATTERN.matcher(userPw).matches()) {
+                    //studNumber.setError("Student number must be 9 characters long");
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
+                    //cellNo.setError("Cell number must be 10 digits and must start with '0'");
 
+                }else if(!CELL_PATTERN.matcher(cellNum).matches()) {
+                    cellNo.setError("Cell number must be 10 digits and must start with '0'");
+
+                }else if(!STUDENTNUMBER_PATTERN.matcher(stuNum).matches()){
+                    studNumber.setError("Student number must be 9 characters long");
                 }
             }
         });
