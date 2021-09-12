@@ -29,6 +29,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -41,14 +43,24 @@ public class disabledStudentBooking extends AppCompatActivity {
     Button buttonBack;
     Button buttonNext;
     Button buttonConfirm;
-    EditText txtDisability;
-    EditText txtFrom;
-    EditText txtTo;
-    EditText txtDate;
-    EditText txtTime;
+    Spinner txtDisability;
+    Spinner txtFrom;
+    Spinner txtTo;
+    Spinner txtDate;
+    Spinner txtTime;
 
     private long backPressTime;
     private Toast backToast;
+
+    Calendar c= Calendar.getInstance();
+    String currentDate = DateFormat.getDateInstance().format(c.getTime());
+
+    List<String> bDisability = Arrays.asList("--nothing selected--","Blind","Paralyzed","Deaf","Mute","Lost Leg","Lost Arm","Other");
+    List<String> bDisabilityFrom = Arrays.asList("--nothing selected--","Orchard Residence","District Six");
+    List<String> bDisabilityTo = Arrays.asList("--nothing selected--","District Six","Orchard Residence");
+    List<String> bDisabilityDate = Arrays.asList(currentDate);
+    List<String> bDisabilityTime = Arrays.asList("--nothing selected--","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00");
+
 
     @Override
     public void onBackPressed() {
@@ -70,11 +82,31 @@ public class disabledStudentBooking extends AppCompatActivity {
         setContentView(R.layout.activity_disabled_student_booking);
         openHelper = new Database(this);
 
-        txtDisability = findViewById(R.id.editTextTextMultiLine);
-        txtFrom = findViewById(R.id.editTextTextMultiLine2);
-        txtTo = findViewById(R.id.editTextTextMultiLine3);
-        txtDate = findViewById(R.id.editTextTextMultiLine4);
-        txtTime = findViewById(R.id.editTextTextMultiLine5);
+        txtDisability = findViewById(R.id.spinnerDisability);
+        ArrayAdapter S_disability = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisability);
+        S_disability.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtDisability.setAdapter(S_disability);
+
+        txtFrom = findViewById(R.id.spinnerDisabilityFrom);
+        ArrayAdapter S_from = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisabilityFrom);
+        S_from.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtFrom.setAdapter(S_from);
+
+        txtTo = findViewById(R.id.spinnerDisabilityTo);
+        ArrayAdapter S_to = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisabilityTo);
+        S_to.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtTo.setAdapter(S_to);
+
+        txtDate = findViewById(R.id.spinnerDisabilityDate);
+        ArrayAdapter S_date = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisabilityDate);
+        S_date.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtDate.setAdapter(S_date);
+
+        txtTime = findViewById(R.id.spinnerDisabilityTime);
+        ArrayAdapter S_time = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisabilityTime);
+        S_time.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        txtTime.setAdapter(S_time);
+
         buttonBack = findViewById(R.id.bck);
         buttonConfirm = findViewById(R.id.cnfrm);
         buttonNext = findViewById(R.id.nxt);
@@ -82,23 +114,25 @@ public class disabledStudentBooking extends AppCompatActivity {
         buttonConfirm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dis = txtDisability.getText().toString();
-                String frm = txtFrom.getText().toString();
-                String to = txtTo.getText().toString();
-                String date = txtDate.getText().toString();
-                String time = txtTime.getText().toString();
+                String dis = txtDisability.getSelectedItem().toString();
+                String frm = txtFrom.getSelectedItem().toString();
+                String to = txtTo.getSelectedItem().toString();
+                String date = txtDate.getSelectedItem().toString();
+                String time = txtTime.getSelectedItem().toString();
                 db = openHelper.getWritableDatabase();
 
-                if (TextUtils.isEmpty(txtDisability.getText().toString()) || TextUtils.isEmpty(txtFrom.getText().toString()) ||
-                        TextUtils.isEmpty(txtTo.getText().toString()) || TextUtils.isEmpty(txtDate.getText().toString()) ||
-                        TextUtils.isEmpty(txtTime.getText().toString())) {
-                    Toast.makeText(disabledStudentBooking.this, "Complete all fields", Toast.LENGTH_LONG).show();
+                if(txtDisability.getSelectedItem().toString().equals(bDisability.get(0)) || (txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(0))||
+                        (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(0)) ||(txtTime.getSelectedItem().toString().equals(bDisabilityTime.get(0)))))) {
+                    Toast.makeText(disabledStudentBooking.this, "No booking has been made.Please complete all fields", Toast.LENGTH_LONG).show();
 
-                } else if (txtDisability.getText().toString().equals(dis) && (txtFrom.getText().toString().equals(frm) &&
-                        (txtTo.getText().toString().equals(to) && (txtDate.getText().toString().equals(date) && (txtTime.getText().toString().equals(time)))))) {
+                }else if(txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(1)) && (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(2))) ||
+                        (txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(2)) && (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(1))))){
+                    Toast.makeText(disabledStudentBooking.this,"Starting point cannot be the same as destination",Toast.LENGTH_LONG).show();
+
+                } else if (txtDisability.getSelectedItem().toString().equals(dis) && (txtFrom.getSelectedItem().toString().equals(frm) &&
+                        (txtTo.getSelectedItem().toString().equals(to) && (txtDate.getSelectedItem().toString().equals(date) && (txtTime.getSelectedItem().toString().equals(time)))))) {
                     addBooking(dis, frm, to, date, time);
                     Toast.makeText(disabledStudentBooking.this, "Booking has been made", Toast.LENGTH_LONG).show();
-
 
                 }
             }
