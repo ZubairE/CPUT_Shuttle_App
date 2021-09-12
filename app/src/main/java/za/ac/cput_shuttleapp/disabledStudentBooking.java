@@ -49,6 +49,8 @@ public class disabledStudentBooking extends AppCompatActivity {
     Spinner txtDate;
     Spinner txtTime;
 
+    int counter = 30;
+
     private long backPressTime;
     private Toast backToast;
 
@@ -132,7 +134,8 @@ public class disabledStudentBooking extends AppCompatActivity {
                 } else if (txtDisability.getSelectedItem().toString().equals(dis) && (txtFrom.getSelectedItem().toString().equals(frm) &&
                         (txtTo.getSelectedItem().toString().equals(to) && (txtDate.getSelectedItem().toString().equals(date) && (txtTime.getSelectedItem().toString().equals(time)))))) {
                     addBooking(dis, frm, to, date, time);
-                    Toast.makeText(disabledStudentBooking.this, "Booking has been made", Toast.LENGTH_LONG).show();
+                    int dec = counter--;
+                    Toast.makeText(disabledStudentBooking.this, "Booking has been made.Seats available: " + dec, Toast.LENGTH_LONG).show();
 
                 }
             }
