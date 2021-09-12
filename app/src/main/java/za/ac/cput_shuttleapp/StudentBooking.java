@@ -99,8 +99,8 @@ public class StudentBooking extends AppCompatActivity {
                     insertDetails(dep,des,time,date);
                    int dec = counter--;
                     Toast.makeText(StudentBooking.this,"Booking has been made.Seats available: " + dec,Toast.LENGTH_LONG).show();
-
-                }
+                    btnAddData.setEnabled(false);
+            }
 
             }
         });
@@ -143,4 +143,6 @@ public class StudentBooking extends AppCompatActivity {
         finish();
     }
 
-}
+    }
+
+
