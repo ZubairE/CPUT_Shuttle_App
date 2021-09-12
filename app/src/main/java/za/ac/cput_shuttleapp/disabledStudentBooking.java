@@ -49,7 +49,7 @@ public class disabledStudentBooking extends AppCompatActivity {
     Spinner txtDate;
     Spinner txtTime;
 
-    int counter = 30;
+    int counter = 15;
 
     private long backPressTime;
     private Toast backToast;
@@ -136,7 +136,7 @@ public class disabledStudentBooking extends AppCompatActivity {
                     addBooking(dis, frm, to, date, time);
                     int dec = counter--;
                     Toast.makeText(disabledStudentBooking.this, "Booking has been made.Seats available: " + dec, Toast.LENGTH_LONG).show();
-
+                    buttonConfirm.setEnabled(false);
                 }
             }
         });
