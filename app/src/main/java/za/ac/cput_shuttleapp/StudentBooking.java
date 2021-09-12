@@ -7,26 +7,44 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
 
 public class StudentBooking extends AppCompatActivity {
     SQLiteDatabase myDb;
     SQLiteOpenHelper oh;
 
-    EditText editFrom;
-    EditText editTo;
-    EditText editTime;
-    EditText editDate;
+    Spinner editFrom;
+    Spinner editTo;
+    Spinner editTime;
+    Spinner editDate;
     Button btnAddData;
     Button btnDelete;
     Button btnNext;
 
-    //Take out if not working
     int counter = 30;
+
+    private SimpleDateFormat sdf;
+    private String date;
+
+    Calendar c= Calendar.getInstance();
+    String currentDate = DateFormat.getDateInstance().format(c.getTime());
+
+    List<String> Bfrom = Arrays.asList("--nothing selected--","District Six","Orchard Residence");
+    List<String> Bto = Arrays.asList("--nothing selected--","Orchard Residence","District Six");
+    List<String> Btime = Arrays.asList("--nothing selected--","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00");
+    List<String> Bdate = Arrays.asList(currentDate);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +52,26 @@ public class StudentBooking extends AppCompatActivity {
         setContentView(R.layout.activity_student_booking);
         oh = new BookingDatabase(this);
 
-        editFrom = findViewById(R.id.editFrom);
-        editTo = findViewById(R.id.editTo);
-        editTime = findViewById(R.id.editTime);
-        editDate = findViewById(R.id.editDate);
+        editFrom = findViewById(R.id.spinnerFrom);
+        ArrayAdapter fromWhere = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,Bfrom);
+        fromWhere.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editFrom.setAdapter(fromWhere);
+
+        editTo = findViewById(R.id.spinnerTo);
+        ArrayAdapter toWhere = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,Bto);
+        toWhere.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editTo.setAdapter(toWhere);
+
+        editTime = findViewById(R.id.spinnerTime);
+        ArrayAdapter bookingTime = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,Btime);
+        bookingTime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editTime.setAdapter(bookingTime);
+
+        editDate = findViewById(R.id.spinnerDate);
+        ArrayAdapter bookingDate = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,Bdate);
+        bookingDate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        editDate.setAdapter(bookingDate);
+
         btnAddData = findViewById(R.id.button_save);
         btnDelete = findViewById(R.id.button_delete);
         btnNext = findViewById(R.id.button_exit);
@@ -46,24 +80,26 @@ public class StudentBooking extends AppCompatActivity {
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dep = editFrom.getText().toString();
-                String des = editTo.getText().toString();
-                String time = editTime.getText().toString();
-                String date = editDate.getText().toString();
+                String dep = editFrom.getSelectedItem().toString();
+                String des = editTo.getSelectedItem().toString();
+                String time = editTime.getSelectedItem().toString();
+                String date = editDate.getSelectedItem().toString();
                 myDb = oh.getWritableDatabase();
 
-                if(TextUtils.isEmpty(editFrom.getText().toString())||TextUtils.isEmpty(editTo.getText().toString())||
-                        TextUtils.isEmpty(editTime.getText().toString())||TextUtils.isEmpty(editDate.getText().toString())) {
-                    Toast.makeText(StudentBooking.this, "Fields Incomplete", Toast.LENGTH_LONG).show();
+            if(editFrom.getSelectedItem().toString().equals(Bfrom.get(0)) || (editTo.getSelectedItem().toString().equals(Bto.get(0))||
+                        editTime.getSelectedItem().toString().equals(Btime.get(0)))) {
+                    Toast.makeText(StudentBooking.this, "No booking has been made.Please complete all fields", Toast.LENGTH_LONG).show();
 
-                }else if(editFrom.getText().toString().equals(dep)&&((editTo.getText().toString().equals(des)&&(editTime.getText().toString().equals(time)
-                        &&(editDate.getText().toString().equals(date) && (counter != 0)))))){
+            }else if(editFrom.getSelectedItem().toString().equals(Bfrom.get(1)) && (editTo.getSelectedItem().toString().equals(Bto.get(2))) ||
+                    (editFrom.getSelectedItem().toString().equals(Bfrom.get(2)) && (editTo.getSelectedItem().toString().equals(Bto.get(1))))){
+                Toast.makeText(StudentBooking.this,"Starting point cannot be the same as destination",Toast.LENGTH_LONG).show();
+
+            }else if(editFrom.getSelectedItem().toString().equals(dep)&&((editTo.getSelectedItem().toString().equals(des)&&(editTime.getSelectedItem().toString().equals(time)
+                        &&(editDate.getSelectedItem().toString().equals(date) && (counter != 0)))))){
                     insertDetails(dep,des,time,date);
                    int dec = counter--;
                     Toast.makeText(StudentBooking.this,"Booking has been made.Seats available: " + dec,Toast.LENGTH_LONG).show();
 
-                }else{
-                    Toast.makeText(StudentBooking.this,"Booking failed",Toast.LENGTH_LONG).show();
                 }
 
             }
