@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CPUT_ShuttleApp">
         <activity
+            android:name=".AboutUs"
+            android:exported="true" />
+        <activity
             android:name=".UpdateDetails"
             android:exported="true" />
-
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
