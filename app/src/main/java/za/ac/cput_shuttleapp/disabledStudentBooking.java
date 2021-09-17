@@ -48,6 +48,7 @@ public class disabledStudentBooking extends AppCompatActivity {
     Spinner txtTo;
     Spinner txtDate;
     Spinner txtTime;
+    TextView linkAboutUs;
 
     int counter = 15;
 
@@ -112,6 +113,7 @@ public class disabledStudentBooking extends AppCompatActivity {
         buttonBack = findViewById(R.id.bck);
         buttonConfirm = findViewById(R.id.cnfrm);
         buttonNext = findViewById(R.id.nxt);
+        linkAboutUs = findViewById(R.id.idABoutUs);
 
         buttonConfirm.setOnClickListener(new OnClickListener() {
             @Override
@@ -158,6 +160,12 @@ public class disabledStudentBooking extends AppCompatActivity {
             }
         });
 
+        linkAboutUs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toAboutUs();
+            }
+        });
     }
 
     public void addBooking(String disability, String from, String to, String date, String time) {
@@ -174,6 +182,12 @@ public class disabledStudentBooking extends AppCompatActivity {
     public void back() {
         Intent back = new Intent(this,StudentBooking.class);
         startActivity(back);
+    }
+
+    public void toAboutUs(){
+        Intent aboutUs = new Intent(disabledStudentBooking.this, AboutUs.class);
+        startActivity(aboutUs);
+        finish();
     }
 }
 
