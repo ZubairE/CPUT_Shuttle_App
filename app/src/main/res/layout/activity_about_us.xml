@@ -36,10 +36,10 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="378dp"
-        android:layout_height="90dp"
-        android:textColor="@color/black"
+        android:layout_width="370dp"
+        android:layout_height="83dp"
         android:text="'CPUT Shuttle App' is a bus service Android mobile application that allows students to book themselves a seat, this goal is to ensure that the student is on time to attend his or her class"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
@@ -73,16 +73,16 @@
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="383dp"
-        android:layout_height="99dp"
+        android:layout_width="364dp"
+        android:layout_height="101dp"
         android:text="The shuttle app was designed by 2nd year Application Development students, Breyton Ernstzen, Zubair Esau, Zaakirah Fakier, Edrico Fielies, Demi Farquahar and Siphosethu Feni from the Cape Peninsula of Technology. The first launch of this mobile application was released in 2021."
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
+        app:layout_constraintVertical_bias="0.428" />
 
     <TextView
         android:id="@+id/textView16"
@@ -97,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
+        app:layout_constraintVertical_bias="0.545" />
 
     <TextView
         android:id="@+id/textView17"
