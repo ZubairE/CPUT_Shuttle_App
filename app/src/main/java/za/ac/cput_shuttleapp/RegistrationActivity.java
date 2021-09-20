@@ -185,6 +185,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public void login() {
         Intent loginPage = new Intent(this, Login.class);
         startActivity(loginPage);
+        finish();
     }
     public void update(){
         Intent update = new Intent(this,UpdateDetails.class);
