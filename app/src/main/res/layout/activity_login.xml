@@ -116,6 +116,7 @@
         android:layout_height="51dp"
         android:text="Show password"
         android:textColor="@color/black"
+        android:buttonTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
