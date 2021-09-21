@@ -100,6 +100,7 @@ public class StudentBooking extends AppCompatActivity {
                    int dec = counter--;
                     Toast.makeText(StudentBooking.this,"Booking has been made.Seats available: " + dec,Toast.LENGTH_LONG).show();
                     btnAddData.setEnabled(false);
+                    btnDelete.setEnabled(false);
             }
 
             }
