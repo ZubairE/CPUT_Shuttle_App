@@ -139,6 +139,7 @@ public class disabledStudentBooking extends AppCompatActivity {
                     int dec = counter--;
                     Toast.makeText(disabledStudentBooking.this, "Booking has been made.Seats available: " + dec, Toast.LENGTH_LONG).show();
                     buttonConfirm.setEnabled(false);
+                    buttonBack.setEnabled(false);
                 }
             }
         });
