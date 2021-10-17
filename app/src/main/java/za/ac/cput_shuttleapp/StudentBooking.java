@@ -22,9 +22,11 @@ import java.util.Calendar;
 import java.util.List;
 
 public class StudentBooking extends AppCompatActivity {
+    //Calls the database classes
     SQLiteDatabase myDb;
     SQLiteOpenHelper oh;
 
+    //Variables
     Spinner editFrom;
     Spinner editTo;
     Spinner editTime;
@@ -33,14 +35,17 @@ public class StudentBooking extends AppCompatActivity {
     Button btnDelete;
     Button btnNext;
 
+    //Counter for counting bus seats
     int counter = 30;
 
     private SimpleDateFormat sdf;
     private String date;
 
+    //Calendar that shows current system date (updates everyday)
     Calendar c= Calendar.getInstance();
     String currentDate = DateFormat.getDateInstance().format(c.getTime());
 
+    //Arraylists that stores selected items for the student to choose from
     List<String> Bfrom = Arrays.asList("--nothing selected--","District Six","Orchard Residence");
     List<String> Bto = Arrays.asList("--nothing selected--","Orchard Residence","District Six");
     List<String> Btime = Arrays.asList("--nothing selected--","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00");
@@ -52,6 +57,8 @@ public class StudentBooking extends AppCompatActivity {
         setContentView(R.layout.activity_student_booking);
         oh = new BookingDatabase(this);
 
+        //Array adapters/spinners/combo-boxes
+        //class for adapting an array of objects as a datasource
         editFrom = findViewById(R.id.spinnerFrom);
         ArrayAdapter fromWhere = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,Bfrom);
         fromWhere.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -76,36 +83,42 @@ public class StudentBooking extends AppCompatActivity {
         btnDelete = findViewById(R.id.button_delete);
         btnNext = findViewById(R.id.button_exit);
 
-
+        //Onclick listener for the add button
         btnAddData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Get input from the combo-boxes
                 String dep = editFrom.getSelectedItem().toString();
                 String des = editTo.getSelectedItem().toString();
                 String time = editTime.getSelectedItem().toString();
                 String date = editDate.getSelectedItem().toString();
                 myDb = oh.getWritableDatabase();
 
+                //If the the first item (--nothing selected--) is selected means the user hasn't choose from the combo-box yet
             if(editFrom.getSelectedItem().toString().equals(Bfrom.get(0)) || (editTo.getSelectedItem().toString().equals(Bto.get(0))||
                         editTime.getSelectedItem().toString().equals(Btime.get(0)))) {
                     Toast.makeText(StudentBooking.this, "No booking has been made.Please complete all fields", Toast.LENGTH_LONG).show();
 
+                //User cannot make the destination the same as his/her starting point
             }else if(editFrom.getSelectedItem().toString().equals(Bfrom.get(1)) && (editTo.getSelectedItem().toString().equals(Bto.get(2))) ||
                     (editFrom.getSelectedItem().toString().equals(Bfrom.get(2)) && (editTo.getSelectedItem().toString().equals(Bto.get(1))))){
                 Toast.makeText(StudentBooking.this,"Starting point cannot be the same as destination",Toast.LENGTH_LONG).show();
 
+                //Gets user input from the comb-boxes and checks if all details has been completed
+                //User gets a message that the booking has been made
             }else if(editFrom.getSelectedItem().toString().equals(dep)&&((editTo.getSelectedItem().toString().equals(des)&&(editTime.getSelectedItem().toString().equals(time)
                         &&(editDate.getSelectedItem().toString().equals(date) && (counter != 0)))))){
                     insertDetails(dep,des,time,date);
                    int dec = counter--;
                     Toast.makeText(StudentBooking.this,"Booking has been made.Seats available: " + dec,Toast.LENGTH_LONG).show();
-                    btnAddData.setEnabled(false);
-                    btnDelete.setEnabled(false);
+                    btnAddData.setEnabled(false);//Enables button after the booking has been made
+                    btnDelete.setEnabled(false);//Enables button after the booking has been made
             }
 
             }
         });
 
+        //Take user back to previous page
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +126,7 @@ public class StudentBooking extends AppCompatActivity {
             }
         });
 
+        //Takes user to the next page
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +136,7 @@ public class StudentBooking extends AppCompatActivity {
 
     }
 
+    //This method calls the database class and allows the input in this perimeter
     public void insertDetails(String departure,String destination,String time,String date){
         ContentValues contentValues = new ContentValues();
         contentValues.put(BookingDatabase.COL_2, departure);
@@ -132,15 +147,16 @@ public class StudentBooking extends AppCompatActivity {
 
     }
 
+    //Take user back to previous page
     public void back(){
         Intent back = new Intent(this,Timetable.class);
         startActivity(back);
     }
 
+    //Takes user to the next page
     public void next(){
         Intent next = new Intent(this,disabledStudentBooking.class);
         startActivity(next);
-        //Remove this method if necessary
         finish();
     }
 
