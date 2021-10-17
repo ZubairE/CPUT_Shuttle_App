@@ -23,9 +23,10 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
-
+//Database for the disabled students
 public class Database extends SQLiteOpenHelper {
 
+    //Declare database columns
     public static final String NAME = "DisabeledStudent.db";
     public static final String TABLE = "Disabled";
     public static final String COL1 = "ID";
@@ -39,11 +40,13 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //Create the database table
         db.execSQL("CREATE TABLE " + TABLE + " (ID INTEGER,DISABILITY TEXT,START TEXT,DESTINATION TEXT,DATE TEXT,TIME TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //Statement for deleting the table
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
         onCreate(db);
     }
