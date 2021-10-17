@@ -37,9 +37,11 @@ import java.util.List;
 import static za.ac.cput_shuttleapp.R.drawable.logo;
 
 public class disabledStudentBooking extends AppCompatActivity {
+    //Database classes has been imported
     SQLiteDatabase db;
     SQLiteOpenHelper openHelper;
 
+    //Variables
     Button buttonBack;
     Button buttonNext;
     Button buttonConfirm;
@@ -50,15 +52,18 @@ public class disabledStudentBooking extends AppCompatActivity {
     Spinner txtTime;
     TextView linkAboutUs;
 
+    //Counter for counting bus seats
     int counter = 15;
 
     private long backPressTime;
     private Toast backToast;
 
+    //Calendar that shows current system date (updates everyday)
     Calendar c= Calendar.getInstance();
     String currentDate = DateFormat.getDateInstance().format(c.getTime());
 
-    List<String> bDisability = Arrays.asList("--nothing selected--","Blind","Paralyzed","Deaf","Mute","Lost Leg","Lost Arm","Other");
+    //Arraylists that stores selected items for the student to choose from
+    List<String> bDisability = Arrays.asList("--nothing selected--","Visually Disabled","Paralyzed","Deaf","Mute","Lost Leg","Lost Arm","Other");
     List<String> bDisabilityFrom = Arrays.asList("--nothing selected--","Orchard Residence","District Six");
     List<String> bDisabilityTo = Arrays.asList("--nothing selected--","District Six","Orchard Residence");
     List<String> bDisabilityDate = Arrays.asList(currentDate);
@@ -67,11 +72,14 @@ public class disabledStudentBooking extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        //Backpress timeout. User must press double tap on exit button to exit the application
+        //2000 milli-seconds
         if (backPressTime + 2000 > System.currentTimeMillis()){
             backToast.cancel();
             super.onBackPressed();
         return;
+
+        //if user pressed only once
     }else{
            backToast = Toast.makeText(getBaseContext(),"Press back again to exit",Toast.LENGTH_SHORT);
            backToast.show();
@@ -83,8 +91,10 @@ public class disabledStudentBooking extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_disabled_student_booking);
-        openHelper = new Database(this);
+        openHelper = new Database(this);//Database object has been declared
 
+        //Array adapters/spinners/combo-boxes
+        //class for adapting an array of objects as a datasource
         txtDisability = findViewById(R.id.spinnerDisability);
         ArrayAdapter S_disability = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item,bDisability);
         S_disability.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -110,14 +120,17 @@ public class disabledStudentBooking extends AppCompatActivity {
         S_time.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         txtTime.setAdapter(S_time);
 
+        //Declare the buttons
         buttonBack = findViewById(R.id.bck);
         buttonConfirm = findViewById(R.id.cnfrm);
         buttonNext = findViewById(R.id.nxt);
         linkAboutUs = findViewById(R.id.idABoutUs);
 
+        //Onclick listener for the confirm button
         buttonConfirm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Gets input from the combo-box
                 String dis = txtDisability.getSelectedItem().toString();
                 String frm = txtFrom.getSelectedItem().toString();
                 String to = txtTo.getSelectedItem().toString();
@@ -125,25 +138,31 @@ public class disabledStudentBooking extends AppCompatActivity {
                 String time = txtTime.getSelectedItem().toString();
                 db = openHelper.getWritableDatabase();
 
+                //If the the first item (--nothing selected--) is selected means the user hasn't choose from the combo-box yet
                 if(txtDisability.getSelectedItem().toString().equals(bDisability.get(0)) || (txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(0))||
                         (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(0)) ||(txtTime.getSelectedItem().toString().equals(bDisabilityTime.get(0)))))) {
                     Toast.makeText(disabledStudentBooking.this, "No booking has been made.Please complete all fields", Toast.LENGTH_LONG).show();
 
+                //User cannot make the destination the same as his/her starting point
                 }else if(txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(1)) && (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(2))) ||
                         (txtFrom.getSelectedItem().toString().equals(bDisabilityFrom.get(2)) && (txtTo.getSelectedItem().toString().equals(bDisabilityTo.get(1))))){
                     Toast.makeText(disabledStudentBooking.this,"Starting point cannot be the same as destination",Toast.LENGTH_LONG).show();
 
+                //Gets user input from the comb-boxes and checks if all details has been completed
+                    //User gets a message that the booking has been made
                 } else if (txtDisability.getSelectedItem().toString().equals(dis) && (txtFrom.getSelectedItem().toString().equals(frm) &&
                         (txtTo.getSelectedItem().toString().equals(to) && (txtDate.getSelectedItem().toString().equals(date) && (txtTime.getSelectedItem().toString().equals(time)))))) {
                     addBooking(dis, frm, to, date, time);
+                    //counter decrements as user makes the booking
                     int dec = counter--;
                     Toast.makeText(disabledStudentBooking.this, "Booking has been made.Seats available: " + dec, Toast.LENGTH_LONG).show();
-                    buttonConfirm.setEnabled(false);
-                    buttonBack.setEnabled(false);
+                    buttonConfirm.setEnabled(false);//Enables button after the booking has been made
+                    buttonBack.setEnabled(false);//Enables button afte booking has been made
                 }
             }
         });
 
+        //Takes user to the next page after user made booking
         buttonNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,7 +172,7 @@ public class disabledStudentBooking extends AppCompatActivity {
             }
         });
 
-
+        //Takes user to the previous page by calling the back method
         buttonBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +180,7 @@ public class disabledStudentBooking extends AppCompatActivity {
             }
         });
 
+        //Onclick listener for the about us page link
         linkAboutUs.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +189,8 @@ public class disabledStudentBooking extends AppCompatActivity {
         });
     }
 
+    //This method inserts the student booking details into the database
+    //This method gets called after user has completed all details
     public void addBooking(String disability, String from, String to, String date, String time) {
         ContentValues cv = new ContentValues();
         cv.put(Database.COL2, disability);
@@ -180,11 +202,13 @@ public class disabledStudentBooking extends AppCompatActivity {
 
     }
 
+    //Takes user back to previous page
     public void back() {
         Intent back = new Intent(this,StudentBooking.class);
         startActivity(back);
     }
 
+    //Takes user to the about page
     public void toAboutUs(){
         Intent aboutUs = new Intent(disabledStudentBooking.this, AboutUs.class);
         startActivity(aboutUs);
