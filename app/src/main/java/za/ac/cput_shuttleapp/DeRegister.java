@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class DeRegister extends AppCompatActivity {
+    //Variables
     SQLiteDatabase db;
     SQLiteOpenHelper myDB_Helper;
     DataBaseHelper dbh;
@@ -31,6 +32,8 @@ public class DeRegister extends AppCompatActivity {
         back = findViewById(R.id.goBack);
         stdNum = findViewById(R.id.sn);
 
+
+        //Onclick listener for the de register button
         deRstr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +46,7 @@ public class DeRegister extends AppCompatActivity {
                     Toast.makeText(DeRegister.this, "Please complete the details", Toast.LENGTH_LONG).show();
 
                 //If student enters student number.It removes his/her data from the database
+                    // Checks if student number exists with the use of cursor
                 }else if(myCursor != null && myCursor.getCount() > 0) {
                     myCursor.moveToNext();
                     deletStudent(stuNum);
@@ -70,6 +74,7 @@ public class DeRegister extends AppCompatActivity {
         startActivity(back);
 
     }
+
     //Deletes student record from the table
     public Integer deletStudent(String student_Number){
         //String stuNum = stdNum.getText().toString();
