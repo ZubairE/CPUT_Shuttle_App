@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class AboutUs extends AppCompatActivity {
+    //Variables for buttons used
     Button btnAUBck;
     Button btnAUExt;
 
@@ -17,9 +18,12 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
+        //Declaring the variables
         btnAUBck = findViewById(R.id.AboutUsBack);
         btnAUExt = findViewById(R.id.AboutUsExit);
 
+        //Onclick listener for back button
+        //Takes user to previous page
         btnAUBck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +32,8 @@ public class AboutUs extends AppCompatActivity {
             }
         });
 
+        //Onclick listener for the exit button
+        //Exit the mobile application
         btnAUExt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
