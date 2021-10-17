@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.regex.Pattern;
 
 public class UpdateDetails extends AppCompatActivity {
+    //Variables
     Button btnUpdate;
     Button btnCancel;
     SQLiteDatabase db;
@@ -31,6 +32,7 @@ public class UpdateDetails extends AppCompatActivity {
     EditText newPassword;
     CheckBox chkPw;
 
+    //Set requirements for passsword (password pattern)
     public static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +             //The pw requires at least one digit
             "(?=.*[a-z])" +             //The pw requires at least one small letter
@@ -40,6 +42,7 @@ public class UpdateDetails extends AppCompatActivity {
             ".{8,15}" +                   //The password requires at least 8 characters
             "$");
 
+    //Set requirements for cell numbers (cell number pattern)
     public static final Pattern CELL_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +
             "(?=\\S+$)" +
@@ -61,6 +64,7 @@ public class UpdateDetails extends AppCompatActivity {
         cell = findViewById(R.id.updateCell);
         stuNo = findViewById(R.id.stuNumber);
 
+        //Onclick listener for the update button
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,29 +76,36 @@ public class UpdateDetails extends AppCompatActivity {
                 db = myDB_Helper.getWritableDatabase();
                 Cursor myCursor = db.rawQuery("SELECT * FROM " + DataBaseHelper.MY_DB_TABLE_NAME + " WHERE " + DataBaseHelper.COLUMN_4 + "= ?", new String[]{studNo});
 
+                //Checks if all fields are completed.If not this method executes and says all details must be completed
                 if(TextUtils.isEmpty(name.getText().toString())||TextUtils.isEmpty(surname.getText().toString())||
                         TextUtils.isEmpty(cell.getText().toString())||TextUtils.isEmpty(stuNo.getText().toString())||
                         TextUtils.isEmpty(newPassword.getText().toString())) {
                     Toast.makeText(UpdateDetails.this, "Complete All Details", Toast.LENGTH_LONG).show();
 
+                    //Matcher checks if password and cell digit requirements has been met also
+                    //Cursor search through the cell number column and checks if it exists.If it exist than the details gets updated
                 }else if(myCursor != null && myCursor.getCount() > 0 && CELL_PATTERN.matcher(cellNo).matches() &&
                         PASSWORD_PATTERN.matcher(newPw).matches()) {
                     myCursor.moveToNext();
                     Toast.makeText(UpdateDetails.this, "Details Updated", Toast.LENGTH_LONG).show();
                     updateStudent(fname, lname, studNo, newPw,cellNo);
 
+                //If the cell number does not match the requirements(10 digits)
                 }else if(!CELL_PATTERN.matcher(cellNo).matches()) {
                     cell.setError("Number must contain 10 digits and starts with '0'");
 
+                    //If the password does not match the requirements(9)
                 }else if(!PASSWORD_PATTERN.matcher(newPw).matches()){
                     newPassword.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
 
+                    //Student number does not exist
                 }else{
                     Toast.makeText(UpdateDetails.this,"Invalid Student Number", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
+        //Takes user back
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +127,8 @@ public class UpdateDetails extends AppCompatActivity {
             }
         });
         }
+
+        //Method for taking user back to previous page
     public void cancel() {
         Intent cancel = new Intent(this, RegistrationActivity.class);
         startActivity(cancel);
@@ -123,6 +136,9 @@ public class UpdateDetails extends AppCompatActivity {
 
     }
 
+    //Calls the database class when user provides input.
+    //This method gets called after all details has been entered.
+    //Details is added on the database
     public Integer updateStudent(String name,String surname,String studentNo,String pw, String cell){
         //db = myDB_Helper.getWritableDatabase();
         ContentValues cv = new ContentValues();
