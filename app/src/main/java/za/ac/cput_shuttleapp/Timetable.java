@@ -53,6 +53,7 @@ public class Timetable extends AppCompatActivity {
 
         });
 
+        //Takes user to the schedule page
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +64,8 @@ public class Timetable extends AppCompatActivity {
         });
 
         }
+
+        //Method that takes user to the booking page
     public void booking(){
         Intent book = new Intent(this,StudentBooking.class);
         startActivity(book);
