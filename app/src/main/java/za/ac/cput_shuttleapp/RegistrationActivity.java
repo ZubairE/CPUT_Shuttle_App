@@ -25,6 +25,7 @@ public class RegistrationActivity extends AppCompatActivity {
     SQLiteOpenHelper db_OpenHelper; //Calls the database class
     SQLiteDatabase myDB; //Database
 
+    //variables
     EditText txtFirstName;
     EditText txtLastName;
     EditText studNumber;
@@ -37,6 +38,7 @@ public class RegistrationActivity extends AppCompatActivity {
     TextView txtUpdate;
 
     //Don't touch this code
+    //Number of characters allowed when student number is entered
     public static final Pattern STUDENTNUMBER_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +
             "(?=\\S+$)" +
@@ -44,6 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
             "$");
 
     //Don't touch this code.
+    //Number of characters allowed when cellphone number is entered
     public static final Pattern CELL_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +
             "(?=\\S+$)" +
@@ -51,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
             "$");
 
     //Don't touch this code
+    //Number of characters allowed when password is entered as well as required characters
     public static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
             "(?=.*[0-9])" +             //The pw requires at least one digit
             "(?=.*[a-z])" +             //The pw requires at least one small letter
@@ -78,6 +82,7 @@ public class RegistrationActivity extends AppCompatActivity {
         txtLink = findViewById(R.id.linkDeregister);//Take out if not working
         txtUpdate = findViewById(R.id.update);//Take out if not working
 
+        //Onclick listener for register button
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,19 +101,21 @@ public class RegistrationActivity extends AppCompatActivity {
                         TextUtils.isEmpty(cellNo.getText().toString())) {
                     Toast.makeText(RegistrationActivity.this, "Please complete all details", Toast.LENGTH_LONG).show();
 
-                    //Checks if student number already exists exist
+                    //Checks if student number already exists exist with the use of a cursor class
                 } else if (myCursor.getCount() > 0) {
                     Toast.makeText(RegistrationActivity.this, "Student number already in use", Toast.LENGTH_LONG).show();
                     //*************************
 
+                 //Checks if the same cellphone number already exists
                 }else if(cellphoneCursor.getCount() > 0){
                     Toast.makeText(RegistrationActivity.this,"Cellphone number already in use", Toast.LENGTH_LONG).show();
 
-                    //If student number is not in the table,this statement executes
+                    //If student number is not in the table,this statement executes.
                 } else if (PASSWORD_PATTERN.matcher(userPw).matches() && (CELL_PATTERN.matcher(cellNum).matches() &&
                         (STUDENTNUMBER_PATTERN.matcher(stuNum).matches()))){
                     insertData(name, surname, stuNum, userPw, cellNum);
                     Toast.makeText(RegistrationActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
+                    //Takes user to the login page
                     login();
 
                     //requires that the password should be 8+ characters long
@@ -117,9 +124,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     password.setError("Password must be at least 8 characters long.Requires at least one digit, one lowercase letter, one uppercase, and one special character");
                     //cellNo.setError("Cell number must be 10 digits and must start with '0'");
 
+                    //Checks if cellphone number meets the required number of digits
                 }else if(!CELL_PATTERN.matcher(cellNum).matches()) {
                     cellNo.setError("Cell number must be 10 digits and must start with '0'");
 
+                    //Checks if student number meets the required number of digits
                 }else if(!STUDENTNUMBER_PATTERN.matcher(stuNum).matches()){
                     studNumber.setError("Student number must be 9 characters long");
                 }
@@ -131,7 +140,7 @@ public class RegistrationActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
+                //Calls the back method
                 goBack();
             }
         });
@@ -150,7 +159,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        //Takes student to the deregsiter page
+        //Takes student to the de-register page
         txtLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +170,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        //Takes user to the update details page
         txtUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,7 +202,8 @@ public class RegistrationActivity extends AppCompatActivity {
         startActivity(update);
     }
 
-    //insert/adds student to the database
+    //insert/adds student to the database.
+    //Calls the database class
     public void insertData(String name, String surname, String stuNum, String userPw, String cellNum) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DataBaseHelper.COLUMN_2, name);
