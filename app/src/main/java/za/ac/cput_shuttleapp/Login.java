@@ -18,10 +18,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
+    //Database class has been imported and Cursor class
     SQLiteDatabase db;
     SQLiteOpenHelper openHelper;
     Cursor cursor;
 
+    //Variables
     EditText studentNumber;
     EditText studentPassword;
     CheckBox chk3;
@@ -41,7 +43,7 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.login);
         btnRegister = findViewById(R.id.register);
 
-        //Takes user to the registartion page. When button is clicked
+        //Takes user to the registration page. When button is clicked
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +66,11 @@ public class Login extends AppCompatActivity {
 
                 //Goes through database and checks if user exists
                 } else if (cursor != null && cursor.getCount() > 0){
-                    cursor.moveToNext();//take out if not work
+                    cursor.moveToNext();
                     Toast.makeText(Login.this, "Welcome to CPUT-Shuttle App!", Toast.LENGTH_LONG).show();
                     timetable();//Opens the timetable page after user entered login details
 
-                //If user does not exist
+                //If user does not exist the message will appear
                 } else {
                     Toast.makeText(Login.this, "Student does not exist.Register Instead?", Toast.LENGTH_LONG).show();
                 }
