@@ -167,7 +167,10 @@ public class disabledStudentBooking extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                System.exit(0);
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+
 
             }
         });
